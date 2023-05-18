@@ -44,6 +44,7 @@ def get_exam_detail(exam_id_list, cookie, referer):
         "X-Requested-With": "XMLHttpRequest"
     }
     for exam_id in exam_id_list:
+        print(exam_id)
         url = 'https://www.zlketang.com/wxpub/api/exam_question?exam_id={}&devtype=web'.format(exam_id)
         a = requests.get(url, headers=header)
         if a.status_code == 200:
@@ -71,24 +72,46 @@ def get_exam_detail(exam_id_list, cookie, referer):
                         print(question_title)
                         options = question['options']
                         options = json.loads(re.sub(clean, '', options))
-                        for k, v in options.items():
-                            option = '{}.{}'.format(k, v)
-                            doc.add_paragraph(option)
-                            print(option)
-                        answer = question['answer'].replace(',', '')
-                        answer = '【答案】{}'.format(answer)
-                        doc.add_paragraph(answer)
-                        print(answer)
-                        solution = question['solution']
-                        solution = re.sub(clean, '', solution)
-                        solution = '【解析】{}'.format(solution)
-                        doc.add_paragraph(solution)
-                        print(solution)
-                        i = 1 + i
+                        if '计算' in part_title:
+                            j = 1
+                            for per_trouble in options:
+                                trouble_title = f'（{j}）' + per_trouble['description']
+                                j = j + 1
+                                print(trouble_title)
+                                doc.add_paragraph(trouble_title)
+                            answer = question['answer']
+                            answers = json.loads(answer)
+                            doc.add_paragraph('【答案】')
+                            for answer in answers:
+                                doc.add_paragraph(answer)
+                                print(answer)
+                            solution = question['solution']
+                            solution = re.sub(clean, '', solution)
+                            solutions = json.loads(solution)
+                            doc.add_paragraph('【解析】')
+                            for solution in solutions:
+                                doc.add_paragraph(solution)
+                                print(solution)
+                            i = 1 + i
+                        else:
+                            for k, v in options.items():
+                                option = '{}.{}'.format(k, v)
+                                doc.add_paragraph(option)
+                                print(option)
+                            answer = question['answer'].replace(',', '')
+                            answer = '【答案】{}'.format(answer)
+                            doc.add_paragraph(answer)
+                            print(answer)
+                            solution = question['solution']
+                            solution = re.sub(clean, '', solution)
+                            solution = '【解析】{}'.format(solution)
+                            doc.add_paragraph(solution)
+                            print(solution)
+                            i = 1 + i
                 doc.save("{}.docx".format(exam_name))
                 time.sleep(3)
             except Exception as e:
-                print('cookie过期，报错如下：{}'.format(e))
+                print('报错如下：{}'.format(e))
         else:
             print('网络问题or反爬，采集失败！')
 
@@ -106,4 +129,3 @@ if __name__ == '__main__':
         referer = input('referer：')
         get_exam_detail(a, cookie, referer)
         print('===========程序结束！！==========')
-    # get_exam_detail(['8888'])
