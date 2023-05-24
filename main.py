@@ -72,26 +72,35 @@ def get_exam_detail(exam_id_list, cookie, referer):
                         print(question_title)
                         options = question['options']
                         options = json.loads(re.sub(clean, '', options))
-                        if '计算' in part_title:
+                        if '计算' in part_title or '综合题' in part_title:
                             j = 1
-                            for per_trouble in options:
-                                trouble_title = f'（{j}）' + per_trouble['description']
-                                j = j + 1
-                                print(trouble_title)
-                                doc.add_paragraph(trouble_title)
+                            if type(options) == list:
+                                for per_trouble in options:
+                                    trouble_title = f'（{j}）' + per_trouble['description']
+                                    j = j + 1
+                                    print(trouble_title)
+                                    doc.add_paragraph(trouble_title)
+                            else:
+                                doc.add_paragraph('')
                             answer = question['answer']
-                            answers = json.loads(answer)
-                            doc.add_paragraph('【答案】')
-                            for answer in answers:
+                            if '[' in answer:
+                                answers = json.loads(answer)
+                                doc.add_paragraph('【答案】')
+                                for answer in answers:
+                                    doc.add_paragraph(answer)
+                                    print(answer)
+                            else:
                                 doc.add_paragraph(answer)
-                                print(answer)
                             solution = question['solution']
                             solution = re.sub(clean, '', solution)
-                            solutions = json.loads(solution)
-                            doc.add_paragraph('【解析】')
-                            for solution in solutions:
+                            if '[' in solution:
+                                solutions = json.loads(solution)
+                                doc.add_paragraph('【解析】')
+                                for solution in solutions:
+                                    doc.add_paragraph(solution)
+                                    print(solution)
+                            else:
                                 doc.add_paragraph(solution)
-                                print(solution)
                             i = 1 + i
                         else:
                             for k, v in options.items():
@@ -120,6 +129,7 @@ if __name__ == '__main__':
     subject_id = input('请输入参数subject_id：')
     t = input('请输入参数t：')
     a = get_exam_id(subject_id, t)
+    print(a)
     if a == '网络问题or反爬，采集失败！':
         print('采集失败，已结束程序！！！')
         pass
@@ -129,3 +139,4 @@ if __name__ == '__main__':
         referer = input('referer：')
         get_exam_detail(a, cookie, referer)
         print('===========程序结束！！==========')
+    # get_exam_detail(['9002'], cookie, referer)
