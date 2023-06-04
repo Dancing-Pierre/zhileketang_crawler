@@ -72,7 +72,7 @@ def get_exam_detail(exam_id_list, cookie, referer):
                         print(question_title)
                         options = question['options']
                         options = json.loads(re.sub(clean, '', options))
-                        if '计算' in part_title or '综合题' in part_title:
+                        if '计算' in part_title or '综合题' in part_title or '简答题' in part_title:
                             j = 1
                             if type(options) == list:
                                 for per_trouble in options:
@@ -85,7 +85,7 @@ def get_exam_detail(exam_id_list, cookie, referer):
                             answer = question['answer']
                             if '[' in answer:
                                 answers = json.loads(answer)
-                                doc.add_paragraph('【答案】')
+                                doc.add_paragraph('参考答案:')
                                 for answer in answers:
                                     doc.add_paragraph(answer)
                                     print(answer)
@@ -95,7 +95,7 @@ def get_exam_detail(exam_id_list, cookie, referer):
                             solution = re.sub(clean, '', solution)
                             if '[' in solution:
                                 solutions = json.loads(solution)
-                                doc.add_paragraph('【解析】')
+                                doc.add_paragraph('解析:')
                                 for solution in solutions:
                                     doc.add_paragraph(solution)
                                     print(solution)
@@ -108,12 +108,12 @@ def get_exam_detail(exam_id_list, cookie, referer):
                                 doc.add_paragraph(option)
                                 print(option)
                             answer = question['answer'].replace(',', '')
-                            answer = '【答案】{}'.format(answer)
+                            answer = '参考答案:{}'.format(answer)
                             doc.add_paragraph(answer)
                             print(answer)
                             solution = question['solution']
                             solution = re.sub(clean, '', solution)
-                            solution = '【解析】{}'.format(solution)
+                            solution = '解析:{}'.format(solution)
                             doc.add_paragraph(solution)
                             print(solution)
                             i = 1 + i
@@ -139,4 +139,3 @@ if __name__ == '__main__':
         referer = input('referer：')
         get_exam_detail(a, cookie, referer)
         print('===========程序结束！！==========')
-    # get_exam_detail(['9002'], cookie, referer)
