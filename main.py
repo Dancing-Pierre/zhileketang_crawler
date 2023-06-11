@@ -52,7 +52,7 @@ def get_exam_detail(exam_id_list, cookie, referer):
             try:
                 exam_name = response['data']['exam_name']
                 doc = Document()
-                doc.add_paragraph(exam_name)
+                doc.add_paragraph('试卷名称：' + exam_name)
                 print(exam_name)
                 detail = response['data']['parts']
                 for per_part in detail:
@@ -60,6 +60,12 @@ def get_exam_detail(exam_id_list, cookie, referer):
                     part_description = per_part['description']
                     part_title_all = '{}（{}）'.format(part_title, part_description)
                     doc.add_paragraph(part_title_all)
+                    if '单项选择题' in part_title or '判断题' in part_title:
+                        doc.add_paragraph(f'<TYPE.TAG>单项选择题')
+                    elif '多项选择题' in part_title:
+                        doc.add_paragraph(f'<TYPE.TAG>多项选择题')
+                    else:
+                        doc.add_paragraph(f'<TYPE.TAG>文字题')
                     print(part_title_all)
                     questions = per_part['questions']
                     i = 1
@@ -99,8 +105,10 @@ def get_exam_detail(exam_id_list, cookie, referer):
                                 for solution in solutions:
                                     doc.add_paragraph(solution)
                                     print(solution)
+                                doc.add_paragraph('分数:1')
                             else:
                                 doc.add_paragraph(solution)
+                                doc.add_paragraph('分数:1')
                             i = 1 + i
                         else:
                             for k, v in options.items():
@@ -115,6 +123,7 @@ def get_exam_detail(exam_id_list, cookie, referer):
                             solution = re.sub(clean, '', solution)
                             solution = '解析:{}'.format(solution)
                             doc.add_paragraph(solution)
+                            doc.add_paragraph('分数:1')
                             print(solution)
                             i = 1 + i
                 doc.save("{}.docx".format(exam_name))
