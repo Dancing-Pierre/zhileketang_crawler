@@ -71,7 +71,7 @@ def get_exam_detail(exam_id_list, exam_chinese_name):
                             print(question_title)
                             options = question['options']
                             options = json.loads(re.sub(clean, '', options))
-                            if '计算' in part_title or '综合题' in part_title or '简答题' in part_title:
+                            if '计算' in part_title or '综合题' in part_title or '简答题' or '案例分析' in part_title:
                                 j = 1
                                 if type(options) == list:
                                     for per_trouble in options:
