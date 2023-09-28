@@ -4,7 +4,7 @@ import random
 import re
 import time
 
-from docx import Document
+from docx import Document  # pip install python-docx
 
 import requests
 
@@ -23,7 +23,7 @@ def get_exam_id(subject_id, t, exam_chinese_name):
             exam_name = per_data['exam_name']
             upgrade_info_str = per_data["upgrade_info"]
             upgrade_info_json = json.loads(upgrade_info_str)
-            if upgrade_info_json['year'] == '2023' or '押题' in exam_name:
+            if upgrade_info_json['year'] == '2023' or '押题' in exam_name or upgrade_info_json['year'] == 2023:
                 if exam_name == exam_chinese_name or get_name:
                     get_name = True
                     exam_dict[f'{exam_name}'] = exam_id
