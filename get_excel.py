@@ -56,10 +56,9 @@ def get_exam_detail(exam_dict):
                     # 每个问题
                     for question in questions:
                         data_dict = {}
-                        clean = re.compile('<.*?>')
+                        clean = re.compile(r'<(?!\/?(p|br)\b)[^>]+>')
                         question_title = question['description']
-                        # if part_title != '不定项选择题':
-                        #     question_title = re.sub(clean, '', question_title)
+                        question_title = clean.sub('', question_title)
                         data_dict['title'] = question_title.replace('&nbsp;', ' ')
                         options = question['options']
                         options = json.loads(re.sub(clean, '', options))
@@ -77,7 +76,7 @@ def get_exam_detail(exam_dict):
                                 data_dict['option'] = ''
                                 data_dict['option_num'] = 0
                             answer = question['answer']
-                            if '[' in answer:
+                            if type(answer) == list:
                                 all_answers = ''
                                 answers = json.loads(answer)
                                 for answer in answers:
@@ -88,7 +87,7 @@ def get_exam_detail(exam_dict):
                             solution = question['solution']
                             get_img(solution, exam_name, part_title)
                             solution = re.sub(clean, '', solution)
-                            if '[' in solution:
+                            if type(solution) == list:
                                 all_solutions = ''
                                 solutions = json.loads(solution)
                                 for solution in solutions:
@@ -124,6 +123,30 @@ def get_exam_detail(exam_dict):
                                 answer = json.loads(answers)[i].replace(',', '')
                                 data_dict['answer'] = answer.replace('&nbsp;', ' ')
                                 data_dict['solution'] = solutions[i]
+                                data.append(data_dict)
+                        elif '综合分析题' in part_title:
+                            data_dict['number'] = 6
+                            answers = question['answer']
+                            # 题干
+                            question_title = clean.sub('', question_title)
+                            question_title = question_title.replace('&nbsp;', ' ')
+                            options_num = len(options)
+                            solutions = question['solution']
+                            cleaned_text = clean_html_css(solutions)
+                            # 提取图片
+                            get_img(solutions, exam_name, '不定项选择题')
+                            # 输出结果
+                            solutions = eval(cleaned_text.replace('&nbsp;', ' '))
+                            for i in range(0, options_num):
+                                data_dict = {}
+                                data_dict['number'] = 7
+                                title = question_title + options[i]['description'].replace('&nbsp;', ' ')
+                                data_dict['title'] = title
+                                answer = json.loads(answers)[i].replace(',', '')
+                                data_dict['answer'] = answer.replace('&nbsp;', ' ')
+                                data_dict['solution'] = solutions[i]
+                                data_dict['option'] = ''
+                                data_dict['option_num'] = 0
                                 data.append(data_dict)
                         else:
                             if '单选题' in part_title or '单项选择题' in part_title:
