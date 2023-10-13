@@ -1,0 +1,178 @@
+{
+  "errcode": 0,
+  "errmsg": "操作成功",
+  "data": {
+    "exam_type": "5",
+    "exam_name": "第六节  行政诉讼程序",
+    "exam_count": "23",
+    "exam_score": "0",
+    "duration": "120",
+    "status": "1",
+    "paper_type": "1",
+    "parts": [
+      {
+        "part_id": "34236",
+        "title": "单项选择题",
+        "description": "每题的备选项中，只有1个最符合题意。",
+        "count": "4",
+        "score": "0.0",
+        "questions": [
+          {
+            "question_id": "344385",
+            "count": "1",
+            "type": "1",
+            "description": "<p><span style=\"font-size:16px;font-family:arial;\">根据《行政诉讼法》的规定，关于行政诉讼起诉期限的说法，正确的是（　　）。</span></p>",
+            "answer": "A",
+            "options": "{\"A\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">公民、法人或者其他组织直接向人民法院提起诉讼的，应当自知道或者应当知道作出行政行为之日起6个月内提出，法律另有规定的除外<\\/span><\\/p>\",\"B\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">公民、法人或者其他组织直接向人民法院提起诉讼的，应当自知道或者应当知道作出行政行为之日起6个月内提出，法律、行政法规另有规定的除外<\\/span><\\/p>\",\"C\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">公民、法人或者其他组织直接向人民法院提起诉讼的，应当自知道或者应当知道作出行政行为之日起6个月内提出，《行政诉讼法》不允许适用其他单行法律特别规定的起诉期限<\\/span><\\/p>\",\"D\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">申请人不服复议决定的，可以在收到复议决定书之日起15日内向人民法院提起诉讼；复议机关逾期不作决定的，申请人可以在复议期满之日起15日内向人民法院提起诉讼，法律、行政法规另有规定的除外<\\/span><\\/p>\"}",
+            "solution": "<p><span style=\"font-size:16px;font-family:arial;\">（1）选项A、B、C，公民、法人或者其他组织直接向人民法院提起诉讼的，应当自知道或者应当知道作出行政行为之日起6个月内提出，法律另有规定的除外；（2）选项D，公民、法人或者其他组织不服复议决定的，可以在收到复议决定书之日起15日内向人民法院提起诉讼。复议机关逾期不作决定的，申请人可以在复议期满之日起15日内向人民法院提起诉讼，法律另有规定的除外。</span></p>",
+            "update_time": "2023-06-06 10:22:07",
+            "videos": null
+          },
+          {
+            "question_id": "344387",
+            "count": "1",
+            "type": "1",
+            "description": "<p><span style=\"font-size:16px;font-family:arial;\">2013</span><span style=\"font-size:16px;font-family:arial;\">年6月，某卫生和计划生育委员会以董某、吕某二人于2011年4月违法超生第二胎为由，作出要求其缴纳社会抚养金12万元、逾期不缴纳每月加收2‰滞纳金的决定，二人不服，向法院起诉。下列关于本案诉讼及法院判决的说法中，错误的是（　　）。</span></p>",
+            "answer": "D",
+            "options": "{\"A\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">法院可以作出允许少缴或者免缴社会抚养金的变更判决<\\/span><\\/p>\",\"B\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">本案诉讼属于共同诉讼<\\/span><\\/p>\",\"C\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">本案诉讼不以当事人申请复议为前置程序<\\/span><\\/p>\",\"D\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">法院应作出撤销判决，因为违法行为发生在2011年4月，到2013年6月已经超过《行政处罚法》规定的追究期限，该卫生和计划生育委员会的决定违反法律<\\/span><\\/p>\"}",
+            "solution": "<p><span style=\"font-size:16px;font-family:arial;\">（1）选项A，人民法院经过审理，认定被告行政处罚明显不当，或者其他行政行为涉及对款额的确定、认定确有错误的，人民法院可以判决变更。本题中，若追缴社会抚养金的数额有错误的，人民法院可以判决变更；（2）选项B，当事人一方或者双方为二人以上，因同一行政行为发生的行政案件，或者因同类行政行为发生的行政案件、人民法院认为可以合并审理并经当事人同意的，为共同诉讼。本题中，董某和吕某均提起诉讼，为共同原告。（3）选项C，本题不属于复议前置（征税行为等），当事人对征收决定不服的，可以依法申请行政复议或者提起行政诉讼；（4）选项D，除“法律”另有规定外，行政处罚的追究时效为2年；而缴纳社会抚养金属于行政征收行为，不受行政处罚追究时效的限制。</span></p>",
+            "update_time": "2023-06-06 10:25:37",
+            "videos": null
+          },
+          {
+            "question_id": "344389",
+            "count": "1",
+            "type": "1",
+            "description": "<p><span style=\"font-size:16px;font-family:arial;\">根据《行政诉讼法》规定，人民法院审理第一审行政案件，认定事实清楚、权利义务关系明确、争议不大的，可以适用简易程序。具备该前提条件，可以适用简易程序的案件包括（　　）。</span></p>",
+            "answer": "B",
+            "options": "{\"A\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">行政机关行使行政裁量权作出被诉行政行为的<\\/span><\\/p>\",\"B\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">被诉行政行为是依法当场作出的<\\/span><\\/p>\",\"C\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">行政机关不履行法定职责的<\\/span><\\/p>\",\"D\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">被诉行政行为涉及款额10000元以下的<\\/span><\\/p>\"}",
+            "solution": "<p><span style=\"font-size:16px;font-family:arial;\">人民法院审理下列第一审行政案件，认为事实清楚、权利义务关系明确、争议不大的，可以适用简易程序：（1）被诉行政行为是依法当场作出的（选项B当选）；（2）案件涉及款额2000元以下的；（3）属于政府信息公开案件的。除前述规定以外的第一审行政案件，当事人各方同意适用简易程序的，可以适用简易程序。发回重审、按照审判监督程序再审的案件不适用简易程序。</span></p>",
+            "update_time": "2023-06-06 10:32:46",
+            "videos": null
+          },
+          {
+            "question_id": "344390",
+            "count": "1",
+            "type": "1",
+            "description": "<p><span style=\"font-size:16px;font-family:arial;\">根据《行政诉讼法》规定，下列关于行政诉讼二审程序的说法中，错误的是（　　）。</span></p>",
+            "answer": "C",
+            "options": "{\"A\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">对事实清楚的上诉案件，二审人民法院可以实行书面审理<\\/span><\\/p>\",\"B\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">二审人民法院审理上诉案件，应当对原审人民法院的判决、裁定和被诉行政行为进行全面审查<\\/span><\\/p>\",\"C\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">二审人民法院审理上诉案件，一般应当自收到上诉状之日起6个月内作出终审判决<\\/span><\\/p>\",\"D\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">当事人不服人民法院第一审判决的，应当在判决书送达之日起15日内提起上诉<\\/span><\\/p>\"}",
+            "solution": "<p><span style=\"font-size:16px;font-family:arial;\">第二审人民法院审理上诉案件，应当自收到上诉状之日起3个月内作出终审判决，有特殊情况需要延长的，由高级人民法院批准，高级人民法院审理上诉案件需要延长的，由最高人民法院批准。选项C当选。</span></p>",
+            "update_time": "2023-06-06 10:34:27",
+            "videos": null
+          }
+        ],
+        "exam_id": "14657",
+        "duration": "120",
+        "status": "1",
+        "paper_type": "1"
+      },
+      {
+        "part_id": "34237",
+        "title": "多项选择题",
+        "description": "每题的备选项中，有2个或2个以上符合题意，至少有1个错项。",
+        "count": "3",
+        "score": "0.0",
+        "questions": [
+          {
+            "question_id": "344386",
+            "count": "1",
+            "type": "2",
+            "description": "<p><span style=\"font-size:16px;font-family:arial;\">根据《行政诉讼法》规定，下列关于起诉事项的说法中正确的有（　　）。</span></p>",
+            "answer": "B,C,D",
+            "options": "{\"A\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">认为国务院部门，地方人民政府及其部门制定的规范性文件不合法，当事人可以单独就规范性文件提起诉讼<\\/span><\\/p>\",\"B\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">起诉状内容欠缺或者有其他错误的，应当给予指导和释明，并一次性告知当事人需补正的内容<\\/span><\\/p>\",\"C\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">受诉人民法院自收到起诉状之日起7日内既不立案，又不作出不予以立案裁定的，当事人可以向上一级人民法院起诉<\\/span><\\/p>\",\"D\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">不经行政复议而直接向人民法院提起行政诉讼的，当事人应当自知道或应当知道作出行政行为之日起6个月内起诉，法律另有规定除外<\\/span><\\/p>\",\"E\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">被告应当在收到诉讼状副本之日起10日内向人民法院提交作出行政行为的证据<\\/span><\\/p>\"}",
+            "solution": "<p><span style=\"font-size:16px;font-family:arial;\">（1）选项A，对抽象行政行为不可单独提起行政诉讼；（2）选项E，被告应当在收到起诉状副本之日起15日内向人民法院提交作出行政行为的证据和所依据的规范性文件，并提出答辩状。</span></p>",
+            "update_time": "2023-06-06 10:23:24",
+            "videos": null
+          },
+          {
+            "question_id": "344388",
+            "count": "1",
+            "type": "2",
+            "description": "<p><span style=\"font-size:16px;font-family:arial;\">行政行为存在重大且明显违法情形，人民法院应判决确认该行政行为无效。根据《行政诉讼法》及司法解释规定，该情形包括的有（　　）。</span></p>",
+            "answer": "A,B,C",
+            "options": "{\"A\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">行政行为的内容客观上不可能实施<\\/span><\\/p>\",\"B\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">减损权利或者增加义务的行政行为没有法律规范依据<\\/span><\\/p>\",\"C\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">行政行为实施主体不具有行政主体资格<\\/span><\\/p>\",\"D\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">行政行为滥用职权的<\\/span><\\/p>\",\"E\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">被告改变原违法行政行为，原告仍要求确认原行政行为违法的<\\/span><\\/p>\"}",
+            "solution": "<p><span style=\"font-size:16px;font-family:arial;\">根据《行政诉讼法》规定：行政行为有实施主体不具有行政主体资格或者没有依据等重大且明显违法情形，原告申请确认行政行为无效的，人民法院判决确认无效。下列行政行为属于上述规定的“重大且明显违法”情形：（1）行政行为实施主体不具有行政主体资格；（2）减损权利或者增加义务的行政行为没有法律规范依据；（3）行政行为的内容客观上不可能实施。选项A、B、C当选。</span></p>",
+            "update_time": "2023-06-06 10:27:32",
+            "videos": null
+          },
+          {
+            "question_id": "344391",
+            "count": "1",
+            "type": "2",
+            "description": "<p><span style=\"font-size:16px;font-family:arial;\">下列关于二审程序的说法中，正确的有（　　）。</span></p>",
+            "answer": "A,B,C",
+            "options": "{\"A\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">二审法院针对的是未发生法律效力的判决<\\/span><\\/p>\",\"B\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">除特殊情况需要延长外，二审法院应当自收到上诉状之日起3个月内作出判决<\\/span><\\/p>\",\"C\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">二审法院应当对一审法院的判决、裁定和被诉行政行为进行全面审查<\\/span><\\/p>\",\"D\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">原审判决认定事实不清的，二审法院可以裁定撤销原判，发回重审<\\/span><\\/p>\",\"E\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">当事人在收到一审判决后10日内提出上诉<\\/span><\\/p>\"}",
+            "solution": "<p><span style=\"font-size:16px;font-family:arial;\">（1）选项D，原判决认定事实不清、证据不足，或者由于违反法定程序可能影响案件正确判决的，裁定撤销原判，发回重审，也可以查清事实后改判；（2）选项E，不服一审判决的上诉期为15天，不服一审裁定的上诉期为10天，原审被告在收到一审判决后15日内上诉符合法律规定。</span></p>",
+            "update_time": "2023-06-06 10:35:46",
+            "videos": null
+          }
+        ],
+        "exam_id": "14657",
+        "duration": "120",
+        "status": "1",
+        "paper_type": "1"
+      },
+      {
+        "part_id": "34238",
+        "title": "综合分析题",
+        "description": "由单项选择题和多项选择题组成。",
+        "count": "16",
+        "score": "0.0",
+        "questions": [
+          {
+            "question_id": "344393",
+            "count": "4",
+            "type": "3",
+            "description": "<p style=\"text-align:left\"><span style=\"font-size:16px;font-family:arial;\">2003</span><span style=\"font-size:16px;font-family:arial;\">年6月10日，天津市中力防雷技术有限公司（以下简称中立公司）业务员孙立兴因公外出，在路过一商场时，因其未注意到商场堆放物倒塌致其受伤。孙立兴后向天津新技术产业园区劳动人事局（以下简称劳动局）提出工伤认定申请，园区劳动局于2004年3月5日作出不认定工伤决定。孙立兴不服园区劳动局决定，向天津市第一中级人民法院提起行政诉讼。</span></p>",
+            "answer": "[\"B\",\"A,B\",\"C\",\"D\"]",
+            "options": "[{\"count\":1,\"type\":\"2\",\"description\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">堆放物倒塌致孙立兴受伤，适用的归责原则是（　　）。<\\/span><\\/p>\",\"options\":{\"A\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">过错责任<\\/span><\\/p>\",\"B\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">推定过错责任<\\/span><\\/p>\",\"C\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">无过错责任<\\/span><\\/p>\",\"D\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">平等原则<\\/span><\\/p>\",\"E\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">公序良俗原则<\\/span><\\/p>\"}},{\"count\":1,\"type\":\"2\",\"description\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">下列关于行政诉讼的说法中，正确的有（　　）。<\\/span><\\/p>\",\"options\":{\"A\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">园区劳动局对其合法性负有举证责任<\\/span><\\/p>\",\"B\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">若孙立兴在诉讼中请求行政赔偿，则其应当对行政行为造成的损害提供证据<\\/span><\\/p>\",\"C\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">在诉讼过程中，园区劳动局可以自行向孙立兴收集证据<\\/span><\\/p>\",\"D\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">在诉讼过程中，园区劳动局可以自行向中力公司收集证据<\\/span><\\/p>\",\"E\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">孙立兴可以提供证明被诉行政行为违法的证据，其提供的证据不成立的、免除被告被诉行政行为合法性的举证责任<\\/span><\\/p>\"}},{\"count\":1,\"type\":\"2\",\"description\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">中力公司应列为（　　）参与行政诉讼。<\\/span><\\/p>\",\"options\":{\"A\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">原告<\\/span><\\/p>\",\"B\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">被告<\\/span><\\/p>\",\"C\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">第三人<\\/span><\\/p>\",\"D\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">行政诉讼代表人<\\/span><\\/p>\",\"E\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">行政诉讼代理人<\\/span><\\/p>\"}},{\"count\":1,\"type\":\"2\",\"description\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">天津市第一中级人民法院于2005年3月23日作出：（1）撤销园区劳动局决定；（2）限园区劳动局在判决生效后60日内重新作出具体行政行为，该判决属于（　　）。<\\/span><\\/p>\",\"options\":{\"A\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">变更判决<\\/span><\\/p>\",\"B\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">确认违法判决<\\/span><\\/p>\",\"C\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">确认无效判决<\\/span><\\/p>\",\"D\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">撤销判决<\\/span><\\/p>\",\"E\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">履行判决<\\/span><\\/p>\"}}]",
+            "solution": "[\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">过错推定责任主要有以下8种：（1）无民事行为能力人在幼儿园、学校或者其他教育机构受侵害时，教育机构的过错推定责任；（2）有下列情形之一的，医疗机构的过错推定责任：①违反法律、行政法规、规章以及其他有关诊疗规范的规定；②隐匿或者拒绝提供与纠纷有关的病历资料；③伪造、篡改或者销毁病历资料；（3）非法占有高度危险物中所有人、管理人的过错推定责任；（4）动物园动物造成他人损害的过错推定责任；（5）建筑物、构筑物或者其他设施及其搁置物、悬挂物发生脱落、坠落造成他人损害的，所有人、管理人或者使用人的过错推定责任；（6）堆放物倒塌、滚落或者滑落致人损害，堆放人的过错推定责任；（7）林木折断、倾倒或者果实坠落致人损害的，林木的所有人或者管理人的过错推定责任；（8）在公共场所或者道路上挖掘修缮安装地下设施等造成他人损害和窨井等地下设施造成他人损害的，施工人和管理人的过错推定责任，选项B当选。<\\/span><\\/p>\",\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">（1）选项C、D，在诉讼过程中，被告及其诉讼代理人不得自行向原告、第三人和证人收集证据；（2）选项E，原告可以提供证明被诉行政行为违法的证据。原告提供的证据不成立的，不免除被告被诉行政行为合法性的举证责任。<\\/span><\\/p>\",\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">公民、法人或者其他组织同被诉行政行为有利害关系但没有提起诉讼，或者同案件处理结果有利害关系的，可以作为第三人申请参加诉讼，或者由人民法院通知参加诉讼，选项C当选。<\\/span><\\/p>\",\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">撤销判决,是指人民法院经过对案件的审査,认定被诉行政行为部分或者全部违法,从而部分或者全部撤销被诉具体行政行为，并可责令被告重新作出行政行为的判决；园区劳动局作出的不予认定孙立兴为工伤的决定，缺乏事实根据，适用法律错误，依法应予撤销；撤销园区劳动局决定和限园区劳动局在判决生效后60日内重新作出具体行政行为，该判决属于撤销判决，选项D当选。<\\/span><\\/p>\"]",
+            "update_time": "2023-06-06 11:06:08",
+            "videos": null
+          },
+          {
+            "question_id": "344397",
+            "count": "4",
+            "type": "3",
+            "description": "<p style=\"text-align:left\"><span style=\"font-size:16px;font-family:arial;\">某县城管执法局认定琼林机械公司违法建房，遂决定强制拆除其违法建筑。其后，强制拆除决定被依法确认为违法。琼林机械公司要求县城管执法局予以赔偿，遭到拒绝，于是向法院提起行政赔偿诉讼。琼林机械公司除向法院提供证据证明房屋损失外，还提供了当时在场的本公司员工甲与当地居民周某的书面证言（二人未出庭作证），以证明房屋被拆除时房屋内有办公用品、机械设备未搬出，县城管执法局对此应予赔偿。县城管执法局提交了执法人员所作现场笔录证据以及琼林机械公司员工乙和执法人员郑某的书面证言（二人未出庭作证），以证明房屋内没有物品。此外，在场当地居民毛某等三人以及执法人员鲁某、琼林机械公司员工丙出庭作证，证明房屋内当时确实没有任何物品。</span></p>",
+            "answer": "[\"B,C\",\"C,D,E\",\"C,E\",\"B,C,D,E\"]",
+            "options": "[{\"count\":1,\"type\":\"2\",\"description\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">根据行政诉讼法律制度的规定，下列关于本案证人证言效力的表述中，正确的有（　　）。<\\/span><\\/p>\",\"options\":{\"A\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">郑某、鲁某的证言均为无效证据，因为郑某、鲁某是本案行政执法人员<\\/span><\\/p>\",\"B\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">甲的证言具有法律上的证明效力，法院不得以甲为公司员工为由认定甲的证言为无效证据<\\/span><\\/p>\",\"C\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">乙、丙的证言具有法律上的证明效力，法院不得以乙、丙为公司员工为由认定乙、丙的证言为无效证据<\\/span><\\/p>\",\"D\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">甲、乙、丙、郑某、鲁某的证言均为无效证据，只有毛某等三人、周某的证言合法有效<\\/span><\\/p>\",\"E\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">甲、乙、丙的证言均为无效证据，只有郑某、鲁某的证言合法有效<\\/span><\\/p>\"}},{\"count\":1,\"type\":\"2\",\"description\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">根据行政诉讼法律制度的规定，下列关于本案证据证明力大小的表述中，正确的有（　　）。<\\/span><\\/p>\",\"options\":{\"A\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">郑某证言的证明效力优于周某证言的证明效力<\\/span><\\/p>\",\"B\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">郑某证言的证明效力优于甲证言的证明效力<\\/span><\\/p>\",\"C\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">丙证言的证明效力优于甲证言的证明效力<\\/span><\\/p>\",\"D\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">毛某等三人证言的证明效力优于周某证言的证明效力<\\/span><\\/p>\",\"E\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">毛某等三人证言的证明效力优于甲证言的证明效力<\\/span><\\/p>\"}},{\"count\":1,\"type\":\"2\",\"description\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">根据行政诉讼法律制度规定，琼林机械公司可以要求本案执法人员郑某、鲁某作为证人出庭作证的情形包括（　　）。<\\/span><\\/p>\",\"options\":{\"A\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">琼林机械公司对乙、丙证言的合法性有异议<\\/span><\\/p>\",\"B\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">琼林机械公司对毛某等三人证言的合法性有异议<\\/span><\\/p>\",\"C\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">琼林机械公司对现场笔录的合法性或者真实性有异议<\\/span><\\/p>\",\"D\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">琼林机械公司对县城管执法局的执法主体资格有异议<\\/span><\\/p>\",\"E\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">对郑某、鲁某身份的合法性有异议<\\/span><\\/p>\"}},{\"count\":1,\"type\":\"2\",\"description\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">根据行政诉讼法律制度规定，下列关于法院对本案证据进行审查认定以及认定案件事实的说法中，正确的有（　　）。<\\/span><\\/p>\",\"options\":{\"A\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">法院对本案经过庭审质证的证据应进行审查，对无须庭审质证的证据不进行审查<\\/span><\\/p>\",\"B\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">法院对本案可能涉及的按照法律规定推定的事实可以直接认定<\\/span><\\/p>\",\"C\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">法院对本案可能涉及的根据日常生活经验法则推定的事实可以直接认定<\\/span><\\/p>\",\"D\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">若法院主持调解，琼林机械公司为达成调解协议而认可部分事实，则法院不得在其后的诉讼中将此作为对其不利的证据使用<\\/span><\\/p>\",\"E\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">如本案中有新的证据材料可能推翻已认定的证据，则法院应再次开庭予以确认<\\/span><\\/p>\"}}]",
+            "solution": "[\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">（1）选项A，除不能正确表达意志的人外，凡是知道案件事实的人，都有出庭作证的义务，行政执法人员也可以作为证人；（2）选项B、C、D、E，证人与当事人之间的关系可能影响证言的证明力，但不直接导致证据无效。<\\/span><\\/p>\",\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">（1）各证人的基本情况：周某和毛某等三人与行政诉讼原、被告之间不存在亲属关系或者其他密切关系；甲、乙、丙属于与原告有密切关系的证人，甲所作的是对原告有利的证言，乙、丙所作的是对原告不利的证言；郑某、鲁某是行政执法人员，所作的证言均对行政执法机关有利；毛某等三人、鲁某、丙为出庭证人，其他均未出庭。（2）其他证人证言优于与当事人有亲属关系或者其他密切关系的证人提供的对该当事人“有利”的证言；出庭作证的证人证言优于未出庭作证的证人证言；周某&gt;郑某，郑某=甲，丙&gt;甲，毛某等三人&gt;周某，毛某等三人&gt;甲，选项C、D、E当选。<\\/span><\\/p>\",\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">有下列情形之一，原告或者第三人可以要求相关行政执法人员作为证人出庭作证：（1）对“现场笔录”的合法性或者真实性有异议的（选项A、B不当选，选项C当选）；（2）对扣押财产的品种或者数量有异议的；（3）对检验物的物品取样或者保管有异议的；（4）对“行政执法人员的身份的合法性”（而非执法主体资格）有异议的（选项D不当选，选项E当选）；（5）需要出庭作证的其他情形。<\\/span><\\/p>\",\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">（1）选项A，法庭在审理案件时，需要对经过庭审质证的证据和无须质证的证据进行逐一审查和对全部证据进行综合审查；（2）选项B、C，行政诉讼中，法庭可以直接认定的事实包括众所周知的事实，自然规律及定理，按照法律规定推定的事实，已经依法证明的事实，根据日常生活经验法则推定的事实；（3）选项D，在行政赔偿诉讼中，人民法院主持调解时，当事人为达成调解协议而对案件事实的认可，不得在其后的诉讼中作为对其不利的证据；（4）选项E，有新的证据材料可能推翻已认定的证据的，应当再次开庭予以确认。<\\/span><\\/p>\"]",
+            "update_time": "2023-06-06 11:23:37",
+            "videos": null
+          },
+          {
+            "question_id": "344403",
+            "count": "4",
+            "type": "3",
+            "description": "<p style=\"text-align:left\"><span style=\"font-size:16px;font-family:arial;\">马某系某市金川区阳关办事处盖塘村村民。2012年2月下旬，马某在本村塔石路东侧动工修建两层砖墙彩钢瓦房，建筑面积为80.68平方米。市规划和建设局（位于该市银湖区）于2月29日决定立案调查，派人前往现场勘查、拍照，并对马某进行了询问。经调查发现，马某所修建的房屋主要是供其生活居住使用。3月1日14时15分，市规划和建设局执法人员向马某送达《责令改正通知书》1份，主要内容是：责令马某在1日内自行拆除，否则将依法采取查封措施，并予以强制拆除。执法人员就送达过程进行了现场录像。马某在规定时间内执意不拆除。3月2日17时45分，市规划和建设局执法人员通知供电部门工作人员，对马某所建房屋实施全面断电。3月3日14时30分，执法人员当场宣布执行并制作了现场笔录。马某拒绝在现场笔录上签字，并组织执法人员强行拆除房屋。半天时间内，市规划和建设局将马某所建的两层砖墙彩钢瓦房拆除完毕。</span></p><p style=\"text-align:left\"><span style=\"font-size:16px;font-family:arial;\">《中华人民共和国城乡规划法》第68条：城乡规划主管部门作出责令停止建设或者限期拆除的决定后，当事人不停止建设或者逾期不拆除的，建设工程所在地县级以上地方人民政府可以责成有关部门采取查封施工现场、强制拆除等措施。</span></p>",
+            "answer": "[\"C\",\"B,D\",\"E\",\"A,E\"]",
+            "options": "[{\"count\":1,\"type\":\"2\",\"description\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">若马某擅自修建房屋正在施工过程中，市规划和建设局根据授权依法对其采取查封措施，则该行为的性质属于（　　）。<\\/span><\\/p>\",\"options\":{\"A\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">行政裁决行为<\\/span><\\/p>\",\"B\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">行政征收行为<\\/span><\\/p>\",\"C\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">行政强制措施<\\/span><\\/p>\",\"D\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">行政强制执行行为<\\/span><\\/p>\",\"E\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">证据先行登记保存<\\/span><\\/p>\"}},{\"count\":1,\"type\":\"2\",\"description\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">若马某对市规划和建设局强制拆除行为不服，直接向人民法院提起行政诉讼，关于受案范围、管辖以及法院处理的说法中，正确的有（　　）。<\\/span><\\/p>\",\"options\":{\"A\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">本案不属于法院受案范围，因为《行政诉讼法》对此未作规定<\\/span><\\/p>\",\"B\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">本案属于法院受案范围，马某应向金川区人民法院起诉<\\/span><\\/p>\",\"C\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">本案属于法院受案范围，马某应向银湖区人民法院起诉<\\/span><\\/p>\",\"D\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">本案属于法院受案范围，因为强制拆除行为作为一种强制执行行为具有可诉性<\\/span><\\/p>\",\"E\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">法院应判决维持强制拆除行为，因为该行为违反了《行政强制法》的程序规定<\\/span><\\/p>\"}},{\"count\":1,\"type\":\"2\",\"description\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">根据《行政强制法》，市规划和建设局依法作出强制拆除决定前，应当经过的法定程序有（　　）。<\\/span><\\/p>\",\"options\":{\"A\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">代履行<\\/span><\\/p>\",\"B\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">口头宣布<\\/span><\\/p>\",\"C\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">搬迁安置<\\/span><\\/p>\",\"D\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">执行中止<\\/span><\\/p>\",\"E\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">书面催告<\\/span><\\/p>\"}},{\"count\":1,\"type\":\"2\",\"description\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">根据《行政强制法》，市规划和建设局依法强制拆除马某违法建筑物的行为属于（　　）。<\\/span><\\/p>\",\"options\":{\"A\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">代履行<\\/span><\\/p>\",\"B\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">行政裁决<\\/span><\\/p>\",\"C\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">司法强制执行<\\/span><\\/p>\",\"D\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">行政强制措施<\\/span><\\/p>\",\"E\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">行政强制执行<\\/span><\\/p>\"}}]",
+            "solution": "[\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">查封、扣押属于行政强制措施，选项C当选。<\\/span><\\/p>\",\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">（1）选项A、D，对行政强制执行不服的案件，也属于行政诉讼受理案件的范围；（2）选项B、C，因不动产提起的行政诉讼，由不动产所在地人民法院管辖；（3）选项E，行政行为违反法定程序的，人民法院应作出撤销判决。<\\/span><\\/p>\",\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">代履行前应当送达“决定书”；代履行3日前，应当催告当事人履行，选项E当选。<\\/span><\\/p>\",\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">“<\\/span><span style=\\\"font-size: 16px;font-family: arial;\\\">强制拆除”实际上是“代为拆除”，属于代履行，属于强制执行方式，选项A、E当选。<\\/span><\\/p>\"]",
+            "update_time": "2023-06-06 11:30:41",
+            "videos": null
+          },
+          {
+            "question_id": "344407",
+            "count": "4",
+            "type": "3",
+            "description": "<p style=\"text-align:left\"><span style=\"font-size:16px;font-family:arial;\">甲省乙市开源公司（注册地位于乙市丙区）经乙市工商局核准取得《企业法人营业执照》，从事某类产品生产经营。后来，甲省商务局函告开源公司：按照甲省地方性法规最新规定，新建此类企业必须到省商务局办理相应生产经营许可证后，方可向当地工商局申请企业登记，否则予以行政处罚。开源公司置之不理，甲省商务局遂以开源公司违法生产经营为由，对其处以40万元罚款，开源公司对此不服，遂向法院起诉，请求撤销甲省商务局的处罚决定。理由是：甲省商务局的函告没有法律依据，且甲省地方性法规最新规定违反法律。</span></p>",
+            "answer": "[\"D,E\",\"D\",\"C,E\",\"C\"]",
+            "options": "[{\"count\":1,\"type\":\"2\",\"description\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">根据《行政诉讼法》及司法解释的规定，下列关于本案中的函告是否属于法院受案范围的说法中，正确的有（　　）。<\\/span><\\/p>\",\"options\":{\"A\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">本案中的函告属于行政诉讼受案范围，因为函告行为是行政强制行为的一种，具有可诉性<\\/span><\\/p>\",\"B\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">本案中的函告属于行政诉讼受案范围，因为函告行为是违法要求履行义务的行为，具有可诉性<\\/span><\\/p>\",\"C\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">本案中的函告属于行政诉讼受案范围，因为函告行为是其他侵犯财产权的行为，具有可诉性<\\/span><\\/p>\",\"D\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">本案中的函告不属于行政诉讼受案范围，因为函告行为作为一种告知、劝告行为，并未确认、改变或消灭当事人法律上的权利义务，不具有可诉性<\\/span><\\/p>\",\"E\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">本案中的函告不属于行政诉讼受案范围，因为函告行为作为一种告知、劝告行为，对当事人法律上的权利义务不产生实际影响，不具有可诉性<\\/span><\\/p>\"}},{\"count\":1,\"type\":\"2\",\"description\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">根据《行政诉讼法》及司法解释的规定，对本案有管辖权的法院是（　　）。<\\/span><\\/p>\",\"options\":{\"A\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">甲省高级法院<\\/span><\\/p>\",\"B\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">乙市中级法院<\\/span><\\/p>\",\"C\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">乙市丙区法院<\\/span><\\/p>\",\"D\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">甲省商务局所在地的法院<\\/span><\\/p>\",\"E\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">甲省工商局所在地的法院<\\/span><\\/p>\"}},{\"count\":1,\"type\":\"2\",\"description\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">根据《行政诉讼法》的基本原则，下列关于本案的审理对象、审理范围的说法中，正确的有（　　）。<\\/span><\\/p>\",\"options\":{\"A\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">审理对象是甲省制定地方性法规的行为<\\/span><\\/p>\",\"B\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">审理对象是甲省商务局的函告行为<\\/span><\\/p>\",\"C\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">审理对象是甲省商务局作出的处罚决定<\\/span><\\/p>\",\"D\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">审理对象是乙市工商局的不作为行为<\\/span><\\/p>\",\"E\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">审理范围包括事实问题和法律问题<\\/span><\\/p>\"}},{\"count\":1,\"type\":\"2\",\"description\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">根据《行政许可法》的规定，下列关于本案甲省商务局要求开源公司办理的行政许可的性质及其创设的说法中，正确的有（　　）。<\\/span><\\/p>\",\"options\":{\"A\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">属于企业或者其他组织的设立登记许可，甲省地方性法规有权创设<\\/span><\\/p>\",\"B\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">属于企业或者其他组织的设立登记许可，只有法律、行政法规才有权创设<\\/span><\\/p>\",\"C\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">属于企业设立的前置性行政许可，甲省地方性法规无权创设<\\/span><\\/p>\",\"D\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">属于企业设立的前置性行政许可，甲省地方性法规及政府规章均有权创设<\\/span><\\/p>\",\"E\":\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">属于企业设立的前置性行政许可，法律、行政法规及甲省地方性法规均有权创设<\\/span><\\/p>\"}}]",
+            "solution": "[\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">（1）选项D，对公民、法人或其他组织权利义务不产生实际影响的行为，不属于行政诉讼的受案范围；在本题中，开源公司已经取得《企业法人营业执照》，函告对开源公司的权利义务不产生实际影响，属于通知性行政事实行为，不属于行政诉讼的受案范围。（2）选项E，“对当事人法律上的权利义务不产生实际影响”和“未确认、改变或消灭当事人法律上的权利义务”没有实质区别，教材对行政事实行为下定义时，亦指出“不以产生、变更或消灭行政的权利义务关系为目的而产生事实上的效果的行为，称为行政事实行为”。<\\/span><\\/p>\",\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">原告直接向法院起诉的案件或者申请复议但复议机关作出维持决定，原告不服复议机关的决定而向法院起诉的案件，均由最初作出具体行政行为的行政机关所在地人民法院管辖；在本题中，作出处罚决定的是甲省商务局，开源公司直接提起行政诉讼，应由甲省商务局所在地的法院管辖，选项D当选。<\\/span><\\/p>\",\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">（1）选项A，人民法院审理行政案件，不审查抽象行政行为、内部行政行为以及国家行为；（2）选项B、C、D，对具体行政行为合法性进行审查原则要求，对超出原告起诉之外的具体行政行为，人民法院不予审查；在本题中，开源公司只是对甲省商务局的罚款决定不服，请求撤销甲省商务局的处罚决定，故审理对象只是甲省商务局作出的处罚决定。（3）选项E，被告对具体行政行为合法性负举证责任原则要求，应当提供作出该具体行政行为的证据（事实问题）和所依据的规范性文件（法律问题）。<\\/span><\\/p>\",\"<p><span style=\\\"font-size: 16px;font-family: arial;\\\">（1）“先取得生产经营许可证，而后方可办理工商登记”，则生产经营许可证的取得，是企业设立工商登记的前置程序；（2）地方性法规和省、自治区、直辖市人民政府规章，不得设定企业或者其他组织的设立登记及其前置性行政许可，选项C当选。<\\/span><\\/p>\"]",
+            "update_time": "2023-06-06 11:41:08",
+            "videos": null
+          }
+        ],
+        "exam_id": "14657",
+        "duration": "120",
+        "status": "1",
+        "paper_type": "1"
+      }
+    ],
+    "solution_config": "0",
+    "subject_id": "128",
+    "subject_name": "涉税服务相关法律"
+  }
+}
