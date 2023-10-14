@@ -139,19 +139,27 @@ def get_exam_detail():
                     data_dict = {}
                     data_dict['number'] = 10
                     title = question_title + options[i]['description'].replace('&nbsp;', ' ')
-                    option = options[i]['options']
-                    all_option = ''
-                    option_num = len(option.items())
-                    for k, v in option.items():
-                        option = '{}.{}'.format(k, v)
-                        all_option = all_option + '<p>{}</p>'.format(option.replace('&nbsp;', ' '))
-                    data_dict['title'] = title
-                    answer = json.loads(answers)[i].replace(',', '')
-                    data_dict['answer'] = answer.replace('&nbsp;', ' ')
-                    data_dict['solution'] = solutions[i]
-                    data_dict['option'] = all_option
-                    data_dict['option_num'] = option_num
-                    data.append(data_dict)
+                    if answers.replace('[', '').replace(']', '').replace('"', '').replace(',', ''):
+                        option = options[i]['options']
+                        all_option = ''
+                        option_num = len(option.items())
+                        for k, v in option.items():
+                            option = '{}.{}'.format(k, v)
+                            all_option = all_option + '<p>{}</p>'.format(option.replace('&nbsp;', ' '))
+                        data_dict['title'] = title
+                        answer = json.loads(answers)[i].replace(',', '')
+                        data_dict['answer'] = answer.replace('&nbsp;', ' ')
+                        data_dict['solution'] = solutions[i]
+                        data_dict['option'] = all_option
+                        data_dict['option_num'] = option_num
+                        data.append(data_dict)
+                    else:
+                        data_dict['title'] = title
+                        data_dict['answer'] = ''
+                        data_dict['solution'] = solutions[i]
+                        data_dict['option'] = ''
+                        data_dict['option_num'] = 0
+                        data.append(data_dict)
             else:
                 if '单选题' in part_title or '单项选择题' in part_title:
                     data_dict['number'] = 1
