@@ -109,24 +109,33 @@ def get_exam_detail(exam_dict):
                             cleaned_text = clean_html_css(solutions)
                             # 提取图片
                             get_img(solutions, exam_name, '计算题')
-                            # 输出结果
-                            solutions = eval(cleaned_text.replace('&nbsp;', ' '))
-                            for i in range(0, options_num):
-                                data_dict = {}
+                            if options:
+                                # 输出结果
+                                solutions = eval(cleaned_text.replace('&nbsp;', ' '))
+                                for i in range(0, options_num):
+                                    data_dict = {}
+                                    data_dict['number'] = 9
+                                    title = question_title + options[i]['description'].replace('&nbsp;', ' ')
+                                    option = options[i]['options']
+                                    all_option = ''
+                                    option_num = len(option.items())
+                                    for k, v in option.items():
+                                        option = '{}.{}'.format(k, v)
+                                        all_option = all_option + '<p>{}</p>'.format(option.replace('&nbsp;', ' '))
+                                    data_dict['title'] = title
+                                    answer = json.loads(answers)[i].replace(',', '')
+                                    data_dict['answer'] = answer.replace('&nbsp;', ' ')
+                                    data_dict['solution'] = solutions[i]
+                                    data_dict['option'] = all_option
+                                    data_dict['option_num'] = option_num
+                                    data.append(data_dict)
+                            else:
                                 data_dict['number'] = 9
-                                title = question_title + options[i]['description'].replace('&nbsp;', ' ')
-                                option = options[i]['options']
-                                all_option = ''
-                                option_num = len(option.items())
-                                for k, v in option.items():
-                                    option = '{}.{}'.format(k, v)
-                                    all_option = all_option + '<p>{}</p>'.format(option.replace('&nbsp;', ' '))
-                                data_dict['title'] = title
-                                answer = json.loads(answers)[i].replace(',', '')
-                                data_dict['answer'] = answer.replace('&nbsp;', ' ')
-                                data_dict['solution'] = solutions[i]
-                                data_dict['option'] = all_option
-                                data_dict['option_num'] = option_num
+                                data_dict['title'] = question_title
+                                data_dict['answer'] = answers
+                                data_dict['solution'] = cleaned_text.replace('&nbsp;', ' ')
+                                data_dict['option'] = ''
+                                data_dict['option_num'] = 0
                                 data.append(data_dict)
                         elif '不定项选择题' in part_title:
                             answers = question['answer']
@@ -156,7 +165,7 @@ def get_exam_detail(exam_dict):
                                 data_dict['answer'] = answer.replace('&nbsp;', ' ')
                                 data_dict['solution'] = solutions[i]
                                 data.append(data_dict)
-                        elif '综合分析题' in part_title:
+                        elif '综合分析题' in part_title or '计算分析题' in part_title:
                             answers = question['answer']
                             # 题干
                             question_title = clean.sub('', question_title)
@@ -243,21 +252,22 @@ def clean_html_css(text):
 def get_img(text, exam_name, part_name):
     # 提取img标签中的src属性值
     img_src_list = []
-    if text[0] == '[' and text[-1] == ']':
-        html_text = json.loads(text)
-        for text in html_text:
-            img_src_list.extend(re.findall(r'<img\s+src="([^"]+)"', text))
-    else:
-        html_text = text
-        img_src_list.extend(re.findall(r'<img\s+src="([^"]+)"', html_text))
-    if img_src_list:
-        for i in range(0, len(img_src_list)):
-            url = img_src_list[i]
-            img_url = 'https://image.zlketang.com' + url
-            r = requests.get(img_url)
-            with open(f"{exam_name}_{part_name}_{i}.png", "wb") as f:  # wb是写二进制
-                f.write(r.content)
-            time.sleep(1)
+    if text:
+        if text[0] == '[' and text[-1] == ']':
+            html_text = json.loads(text)
+            for text in html_text:
+                img_src_list.extend(re.findall(r'<img\s+src="([^"]+)"', text))
+        else:
+            html_text = text
+            img_src_list.extend(re.findall(r'<img\s+src="([^"]+)"', html_text))
+        if img_src_list:
+            for i in range(0, len(img_src_list)):
+                url = img_src_list[i]
+                img_url = 'https://image.zlketang.com' + url
+                r = requests.get(img_url)
+                with open(f"{exam_name}_{part_name}_{i}.png", "wb") as f:  # wb是写二进制
+                    f.write(r.content)
+                time.sleep(1)
 
 
 if __name__ == '__main__':
