@@ -228,7 +228,10 @@ def get_img(text, exam_name, part_name):
         if img_src_list:
             for i in range(0, len(img_src_list)):
                 url = img_src_list[i]
-                img_url = 'https://image.zlketang.com' + url
+                if 'https://' in url:
+                    img_url = url
+                else:
+                    img_url = 'https://image.zlketang.com' + url
                 r = requests.get(img_url)
                 with open(f"{exam_name}_{part_name}_{i}.png", "wb") as f:  # wb是写二进制
                     f.write(r.content)
