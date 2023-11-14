@@ -42,7 +42,7 @@ def get_exam_detail(exam_dict):
         a = requests.get(url, headers=header)
         if a.status_code == 200:
             response = json.loads(a.text)
-            exam_name = str(response['data']['exam_name']).strip()
+            exam_name = str(response['data']['exam_name']).replace('\t', '').replace('\n', '').strip()
             try:
                 data = []
                 print(exam_name)
