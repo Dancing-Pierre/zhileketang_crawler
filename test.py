@@ -22,11 +22,14 @@ def get_exam_detail():
         if part_title == '不定项选择题':
             part_title = '多项选择题'
         questions = per_part['questions']
+        number = 1
         # 每个问题
         for question in questions:
             data_dict = {}
             clean = re.compile(r'<(?!\/?(p|br)\b)[^>]+>')
             question_title = question['description']
+            # 提取图片
+            get_img(question_title, exam_name, f'{part_title}_题目_{number}')
             question_title = clean.sub('', question_title)
             data_dict['title'] = question_title.replace('&nbsp;', ' ')
             options = question['options']
@@ -54,7 +57,7 @@ def get_exam_detail():
                 else:
                     data_dict['answer'] = answer.replace('&nbsp;', ' ')
                 solution = question['solution']
-                get_img(solution, exam_name, part_title)
+                get_img(solution, exam_name, f'{part_title}_解析_{number}')
                 solution = re.sub(clean, '', solution)
                 if type(solution) == list:
                     all_solutions = ''
@@ -74,7 +77,7 @@ def get_exam_detail():
                 solutions = question['solution']
                 cleaned_text = clean_html_css(solutions)
                 # 提取图片
-                get_img(solutions, exam_name, '计算题')
+                get_img(solutions, exam_name, f'{part_title}_解析_{number}')
                 if options:
                     # 输出结果
                     solutions = eval(cleaned_text.replace('&nbsp;', ' '))
@@ -112,7 +115,7 @@ def get_exam_detail():
                 solutions = question['solution']
                 cleaned_text = clean_html_css(solutions)
                 # 提取图片
-                get_img(solutions, exam_name, '不定项选择题')
+                get_img(solutions, exam_name, f'{part_title}_解析_{number}')
                 # 输出结果
                 solutions = eval(cleaned_text.replace('&nbsp;', ' '))
                 for i in range(0, options_num):
@@ -141,9 +144,11 @@ def get_exam_detail():
                 solutions = question['solution']
                 cleaned_text = clean_html_css(solutions)
                 # 提取图片
-                get_img(solutions, exam_name, '综合分析题')
+                get_img(solutions, exam_name, f'{part_title}_解析_{number}')
                 # 输出结果
-                solutions = eval(cleaned_text.replace('&nbsp;', ' '))
+                cleaned_text = cleaned_text.replace('&nbsp;', ' ')
+                if '[' in cleaned_text[0] and ']' in cleaned_text[-1]:
+                    solutions = eval(cleaned_text)
                 for i in range(0, options_num):
                     data_dict = {}
                     data_dict['number'] = 10
@@ -188,11 +193,12 @@ def get_exam_detail():
                 answer = question['answer'].replace(',', '')
                 data_dict['answer'] = answer.replace('&nbsp;', ' ')
                 solution = question['solution']
-                get_img(solution, exam_name, part_title)
+                get_img(solution, exam_name, f'{part_title}_解析_{number}')
                 solution = re.sub(clean, '', solution)
                 data_dict['solution'] = solution.replace('&nbsp;', ' ')
                 data.append(data_dict)
             print(data_dict)
+            number = number + 1
     with open(f"{exam_name}.csv", mode="w", newline="", encoding='gbk', errors='ignore') as csvfile:
         fieldnames = ["number", "title", "option", "option_num", "answer", "solution"]
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
