@@ -135,7 +135,7 @@ def get_exam_detail():
                     data_dict['answer'] = answer.replace('&nbsp;', ' ')
                     data_dict['solution'] = solutions[i]
                     data.append(data_dict)
-            elif '综合分析题' in part_title or '计算分析题' in part_title:
+            elif '综合分析题' in part_title or '计算分析题' in part_title or '计算问答题' in part_title:
                 answers = question['answer']
                 # 题干
                 question_title = clean.sub('', question_title)
@@ -174,6 +174,7 @@ def get_exam_detail():
                         data_dict['option'] = ''
                         data_dict['option_num'] = 0
                         data.append(data_dict)
+                    print(data_dict)
             else:
                 if '单选题' in part_title or '单项选择题' in part_title:
                     data_dict['number'] = 1
@@ -197,7 +198,7 @@ def get_exam_detail():
                 solution = re.sub(clean, '', solution)
                 data_dict['solution'] = solution.replace('&nbsp;', ' ')
                 data.append(data_dict)
-            print(data_dict)
+                print(data_dict)
             number = number + 1
     with open(f"{exam_name}.csv", mode="w", newline="", encoding='gbk', errors='ignore') as csvfile:
         fieldnames = ["number", "title", "option", "option_num", "answer", "solution"]
