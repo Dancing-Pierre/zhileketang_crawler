@@ -1,42 +1,22 @@
 # -*- coding: utf-8 -*-
-import csv
 import json
 import random
 import re
 import time
+from datetime import datetime
 
+import pandas as pd
 import requests
 
 
-def get_exam_id(subject_id, t, exam_chinese_name):
-    url = 'https://www.zlketang.com/wxpub/api/simulationv4?from=web&channel=web&devtype=web&platform_type=web&subject_id={}&t={}'.format(
-        subject_id, t)
-    a = requests.get(url=url, headers=header)
-    exam_dict = {}
-    get_name = False
-    if a.status_code == 200:
-        response = json.loads(a.text)
-        vip_data = response['data']['VIP保过题库']
-        for per_data in vip_data:
-            exam_id = per_data['exam_id']
-            exam_name = per_data['exam_name']
-            upgrade_info_str = per_data["upgrade_info"]
-            upgrade_info_json = json.loads(upgrade_info_str)
-            if upgrade_info_json['year'] == '2023' or '押题' in exam_name or upgrade_info_json['year'] == 2023:
-                exam_name_replace = exam_name.replace(' ', '')
-                exam_chinese_name_replace = exam_chinese_name.replace(' ', '')
-                if exam_name_replace == exam_chinese_name_replace or get_name:
-                    get_name = True
-                    exam_dict[f'{exam_name}'] = exam_id
-    else:
-        exam_dict = '网络问题or反爬，采集失败！'
-    return exam_dict
-
-
-def get_exam_detail(exam_dict):
+def get_exam_detail(exam_list):
+    """
+    获取试卷详情
+    :param exam_list:
+    :return:
+    """
     page = 1
-    for exam_name in exam_dict:
-        exam_id = exam_dict[exam_name]
+    for exam_id in exam_list:
         print(f'开始采集试卷：{exam_id}')
         url = 'https://www.zlketang.com/wxpub/api/exam_question?exam_id={}&devtype=web'.format(exam_id)
         a = requests.get(url, headers=header)
@@ -63,17 +43,16 @@ def get_exam_detail(exam_dict):
                             # 提取图片
                             get_img(question_title, exam_name, f'{part_title}_题目{number}')
                             question_title = clean.sub('', question_title)
-                            data_dict['title'] = question_title.replace('&nbsp;', ' ')
+                            data_dict['题目'] = question_title.replace('&nbsp;', ' ')
                             options = question['options']
                             options = json.loads(re.sub(clean, '', options))
                             if '综合题' in part_title or '简答题' in part_title or '案例分析' in part_title:
-                                data_dict['number'] = 6
+                                data_dict['题目类型'] = part_title
                                 all_option = ''
                                 if type(options) == list:
                                     option_num = len(options)
                                     for per_trouble in options:
-                                        all_option = all_option + '<p>{}</p>'.format(
-                                            per_trouble['description'].replace('&nbsp;', ' '))
+                                        all_option = all_option + per_trouble['description'].replace('&nbsp;', ' ')
                                     data_dict['option'] = all_option
                                     data_dict['option_num'] = option_num
                                 else:
@@ -115,15 +94,15 @@ def get_exam_detail(exam_dict):
                                     solutions = eval(cleaned_text.replace('&nbsp;', ' '))
                                     for i in range(0, options_num):
                                         data_dict = {}
-                                        data_dict['number'] = 9
+                                        data_dict['题目类型'] = part_title
                                         title = question_title + options[i]['description'].replace('&nbsp;', ' ')
                                         option = options[i]['options']
                                         all_option = ''
                                         option_num = len(option.items())
                                         for k, v in option.items():
                                             option = '{}.{}'.format(k, v)
-                                            all_option = all_option + '<p>{}</p>'.format(option.replace('&nbsp;', ' '))
-                                        data_dict['title'] = title
+                                            all_option = all_option + option.replace('&nbsp;', ' ')
+                                        data_dict['题目'] = title
                                         answer = json.loads(answers)[i].replace(',', '')
                                         data_dict['answer'] = answer.replace('&nbsp;', ' ')
                                         data_dict['solution'] = solutions[i]
@@ -131,8 +110,8 @@ def get_exam_detail(exam_dict):
                                         data_dict['option_num'] = option_num
                                         data.append(data_dict)
                                 else:
-                                    data_dict['number'] = 9
-                                    data_dict['title'] = question_title
+                                    data_dict['题目类型'] = part_title
+                                    data_dict['题目'] = question_title
                                     data_dict['answer'] = answers
                                     data_dict['solution'] = cleaned_text.replace('&nbsp;', ' ')
                                     data_dict['option'] = ''
@@ -152,22 +131,23 @@ def get_exam_detail(exam_dict):
                                 solutions = eval(cleaned_text.replace('&nbsp;', ' '))
                                 for i in range(0, options_num):
                                     data_dict = {}
-                                    data_dict['number'] = 7
+                                    data_dict['题目类型'] = part_title
                                     title = question_title + options[i]['description'].replace('&nbsp;', ' ')
                                     option = options[i]['options']
                                     all_option = ''
                                     option_num = len(option.items())
                                     for k, v in option.items():
                                         option = '{}.{}'.format(k, v)
-                                        all_option = all_option + '<p>{}</p>'.format(option.replace('&nbsp;', ' '))
-                                    data_dict['title'] = title
+                                        all_option = all_option + option.replace('&nbsp;', ' ')
+                                    data_dict['题目'] = title
                                     data_dict['option'] = all_option
                                     data_dict['option_num'] = option_num
                                     answer = json.loads(answers)[i].replace(',', '')
                                     data_dict['answer'] = answer.replace('&nbsp;', ' ')
                                     data_dict['solution'] = solutions[i]
                                     data.append(data_dict)
-                            elif '综合分析题' in part_title or '计算分析题' in part_title or '计算问答题' in part_title:
+                            elif any(keyword in part_title for keyword in
+                                     ['综合分析题', '计算分析题', '计算问答题', '问答题']):
                                 answers = question['answer']
                                 # 题干
                                 question_title = clean.sub('', question_title)
@@ -183,7 +163,7 @@ def get_exam_detail(exam_dict):
                                     solutions = eval(cleaned_text)
                                 for i in range(0, options_num):
                                     data_dict = {}
-                                    data_dict['number'] = 10
+                                    data_dict['题目类型'] = part_title
                                     title = question_title + options[i]['description'].replace('&nbsp;', ' ')
                                     if answers.replace('[', '').replace(']', '').replace('"', '').replace(',', ''):
                                         option = options[i]['options']
@@ -191,8 +171,8 @@ def get_exam_detail(exam_dict):
                                         option_num = len(option.items())
                                         for k, v in option.items():
                                             option = '{}.{}'.format(k, v)
-                                            all_option = all_option + '<p>{}</p>'.format(option.replace('&nbsp;', ' '))
-                                        data_dict['title'] = title
+                                            all_option = all_option + option.replace('&nbsp;', ' ')
+                                        data_dict['题目'] = title
                                         answer = json.loads(answers)[i].replace(',', '')
                                         data_dict['answer'] = answer.replace('&nbsp;', ' ')
                                         data_dict['solution'] = solutions[i]
@@ -200,7 +180,7 @@ def get_exam_detail(exam_dict):
                                         data_dict['option_num'] = option_num
                                         data.append(data_dict)
                                     else:
-                                        data_dict['title'] = title
+                                        data_dict['题目'] = title
                                         data_dict['answer'] = ''
                                         data_dict['solution'] = solutions[i]
                                         data_dict['option'] = ''
@@ -208,19 +188,12 @@ def get_exam_detail(exam_dict):
                                         data.append(data_dict)
                                     print(data_dict)
                             else:
-                                if '单选题' in part_title or '单项选择题' in part_title:
-                                    data_dict['number'] = 1
-                                elif '多选题' in part_title or '多项选择题' in part_title:
-                                    data_dict['number'] = 2
-                                elif '判断题' in part_title:
-                                    data_dict['number'] = 3
-                                else:
-                                    data_dict['number'] = 0
+                                data_dict['题目类型'] = part_title
                                 all_option = ''
                                 option_num = len(options.items())
                                 for k, v in options.items():
                                     option = '{}.{}'.format(k, v)
-                                    all_option = all_option + '<p>{}</p>'.format(option.replace('&nbsp;', ' '))
+                                    all_option = all_option + option.replace('&nbsp;', ' ')
                                 data_dict['option'] = all_option
                                 data_dict['option_num'] = option_num
                                 answer = question['answer'].replace(',', '')
@@ -231,24 +204,30 @@ def get_exam_detail(exam_dict):
                                 data_dict['solution'] = solution.replace('&nbsp;', ' ')
                                 data.append(data_dict)
                             print(data_dict)
-                            number = number + 1
-                    with open(f"{page}.{exam_id}_{exam_name}.csv", mode="w", newline="", encoding='gbk',
-                              errors='ignore') as csvfile:
-                        fieldnames = ["number", "title", "option", "option_num", "answer", "solution"]
-                        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-                        for row in data:
-                            writer.writerow(row)
+                    df = pd.DataFrame(data)
+                    df.rename(columns={'solution': '解析', 'answer': '正确答案'}, inplace=True)
+                    df = df[['题目类型', '题目', '解析', '正确答案', 'option', 'option_num']]
+                    df['题目类型'] = df['题目类型'].str.split('、').apply(lambda x: ','.join(x[1:]))
+                    options_split = df['option'].apply(split_options)
+                    options_df = pd.DataFrame(options_split.tolist())
+                    result_df = pd.concat([df, options_df], axis=1).drop(columns=['option', 'option_num'])
+                    result_df['正确答案'] = result_df['正确答案'].apply(replace_empty_list)
+                    result_df.to_csv(f"{page}.{exam_id}_{exam_name}.csv", encoding='gbk', errors='ignore', index=False)
                     page = page + 1
                     time.sleep(random.randint(2, 4))
                 except Exception as e:
                     print('报错如下：{}，可以尝试换cookie重启程序，如不行再联系开发者！'.format(e))
-                    break
+                    pass
         else:
             print('网络问题or反爬，采集失败！')
 
 
 def clean_html_css(text):
-    # 移除HTML标签
+    """
+    移除网页html、css标签
+    :param text:
+    :return:
+    """
     text = re.sub(r'<[^>]+>', '', text)
     # 移除CSS样式
     text = re.sub(r'<style[^>]*>[\s\S]*?</style>', '', text)
@@ -256,7 +235,13 @@ def clean_html_css(text):
 
 
 def get_img(text, exam_name, part_name):
-    # 提取img标签中的src属性值
+    """
+    下载图片
+    :param text:
+    :param exam_name: 试卷名称
+    :param part_name: 所属部分
+    :return:
+    """
     img_src_list = []
     if text:
         if text[0] == '[' and text[-1] == ']':
@@ -279,36 +264,113 @@ def get_img(text, exam_name, part_name):
                 time.sleep(1)
 
 
+def get_exam_id(subject_id, t, tab_name, is_get):
+    """
+    获取试卷列表页ID
+    :param subject_id: 考卷id
+    :param t: 时间戳
+    :param tab_name:板块名称
+    :param is_get:是否需要中途采集
+    :return:
+    """
+    url = f'https://www.zlketang.com/wxpub/api/simulation_v7?from=web&channel=web&devtype=web&platform_type=web&subject_id={subject_id}&t={t}'
+    a = requests.get(url=url, headers=header)
+    exam_dict = {}
+    if a.status_code == 200:
+        response = json.loads(a.text)
+        vip_data = response['data']['all_exam_types']
+        for i in vip_data:
+            type_key = i['name']
+            if type_key == tab_name:
+                type_data = i['exam_list']
+                type_value = []
+                if is_get:
+                    is_get = is_get.strip().replace(' ', '')
+                    arrive = False
+                    for per_data in type_data:
+                        exam_id = per_data['exam_id']
+                        exam_name = per_data['exam_name'].strip().replace(' ', '')
+                        if arrive:
+                            type_value.append(exam_id)
+                        else:
+                            if is_get in exam_name:
+                                arrive = True
+                                type_value.append(exam_id)
+                else:
+                    for per_data in type_data:
+                        exam_id = per_data['exam_id']
+                        type_value.append(exam_id)
+                exam_dict[type_key] = type_value
+    else:
+        exam_dict = '网络问题or反爬，采集失败！'
+    return exam_dict
+
+
+def split_options(option_str):
+    # 使用正则表达式匹配选项
+    pattern = re.compile(r'([A-Z]\.[^A-Z]*)')
+    matches = pattern.findall(option_str)
+    option_dict = {}
+    for match in matches:
+        key = match[0]  # 获取选项的字母
+        option_dict[f'答案{key}'] = '<p>' + match.strip() + '</p>'  # 去掉两端的空格
+    return option_dict
+
+
+def replace_empty_list(option):
+    if '[' in option and ']' in option:
+        for i in eval(option):
+            if not i:
+                return None
+            else:
+                return option
+    else:
+        return None
+
+
 if __name__ == '__main__':
-    try:
-        subject_id = input('请输入参数subject_id：')
-        t = input('请输入参数t：')
-        cookie = input('请输入cookie：')
-        exam_chinese_name = input('请输入想要开始采集的试卷名：')
-        header = {
-            "Accept": "*/*",
-            "Accept-Encoding": "gzip, deflate, br",
-            "Accept-Language": "zh-CN,zh-TW;q=0.9,zh;q=0.8",
-            "Cookie": cookie,
-            "Referer": 'https://www.zlketang.com/personal/index.html?name=1',
-            "Sec-Ch-Ua": "\"Google Chrome\";v=\"113\", \"Chromium\";v=\"113\", \"Not-A.Brand\";v=\"24\"",
-            "Sec-Ch-Ua-Mobile": "?0",
-            "Sec-Ch-Ua-Platform": "\"Windows\"",
-            "Sec-Fetch-Dest": "empty",
-            "Sec-Fetch-Mode": "cors",
-            "Sec-Fetch-Site": "same-origin",
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36",
-            "X-Requested-With": "XMLHttpRequest"
-        }
-        a = get_exam_id(subject_id, t, exam_chinese_name)
-        print(f'本次采集的试卷列表：{a}')
-        if a == '网络问题or反爬，采集失败！':
-            print('采集失败，已结束程序！！！')
+    # 获取当前日期和时间
+    current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    a = datetime.strptime('20240704', "%Y%m%d").strftime("%Y-%m-%d %H:%M:%S")
+    if current_time <= a:
+        tab_dict = {1: '章节练习', 2: '模拟试卷', 3: '历年真题', 4: 'VIP押题'}
+        print('\033[0;34m======================之了课堂采集程序========================\033[0m')
+        while True:
+            tab_id = int(
+                input('\033[1;36m请输入想采集的板块的ID\n选择列表【1-章节练习|2-模拟试卷|3-历年真题|4-VIP押题】：\033[0m'))
+            if tab_id in [1, 2, 3, 4]:
+                break
+            else:
+                print('\033[31m**输入错误，请从中选择ID【1-章节练习|2-模拟试卷|3-历年真题|4-VIP押题】!!\033[0m')
+        tab_name = tab_dict[tab_id]
+        print(f'\033[31m采集限制- {tab_name} -模块\033[0m')
+        try:
+            subject_id = input('请输入参数subject_id：')
+            t = input('请输入参数t：')
+            cookie = input('请输入cookie：')
+            header = {
+                "Accept": "*/*",
+                "Accept-Encoding": "gzip, deflate, br",
+                "Accept-Language": "zh-CN,zh-TW;q=0.9,zh;q=0.8",
+                "Cookie": cookie,
+                "Referer": 'https://www.zlketang.com/personal/index.html?name=1',
+                "Sec-Ch-Ua": "\"Google Chrome\";v=\"113\", \"Chromium\";v=\"113\", \"Not-A.Brand\";v=\"24\"",
+                "Sec-Ch-Ua-Mobile": "?0",
+                "Sec-Ch-Ua-Platform": "\"Windows\"",
+                "Sec-Fetch-Dest": "empty",
+                "Sec-Fetch-Mode": "cors",
+                "Sec-Fetch-Site": "same-origin",
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36",
+                "X-Requested-With": "XMLHttpRequest"
+            }
+            is_get = input('是否需要从中途采集，如需要输入试卷名，不需要就直接回车！！：')
+            exam_list = get_exam_id(subject_id, t, tab_name, is_get)
+            print(f'\033[31m采集列表如下：{exam_list}\033[0m')
+            get_exam_detail(exam_list[tab_name])
             input('回车退出程序')
-        else:
-            get_exam_detail(a)
-            print('===========程序结束！！==========')
+        except Exception as e:
+            print('报错如下：{}，请联系开发者！'.format(e))
             input('回车退出程序')
-    except Exception as e:
-        print('报错如下：{}，请联系开发者！'.format(e))
+    else:
+        print('试用到期！！')
         input('回车退出程序')
