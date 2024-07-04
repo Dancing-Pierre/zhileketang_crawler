@@ -70,7 +70,7 @@ def replace_empty_list(option):
             else:
                 return option
     else:
-        return None
+        return option
 
 
 with open('1111.json', 'r', encoding='utf-8') as file:

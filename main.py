@@ -325,14 +325,14 @@ def replace_empty_list(option):
             else:
                 return option
     else:
-        return None
+        return option
 
 
 if __name__ == '__main__':
-    # 获取当前日期和时间
-    current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    a = datetime.strptime('20240704', "%Y%m%d").strftime("%Y-%m-%d %H:%M:%S")
-    if current_time <= a:
+    # # 获取当前日期和时间
+    # current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    # a = datetime.strptime('20240704', "%Y%m%d").strftime("%Y-%m-%d %H:%M:%S")
+    # if current_time <= a:
         tab_dict = {1: '章节练习', 2: '模拟试卷', 3: '历年真题', 4: 'VIP押题'}
         print('\033[0;34m======================之了课堂采集程序========================\033[0m')
         while True:
@@ -371,6 +371,6 @@ if __name__ == '__main__':
         except Exception as e:
             print('报错如下：{}，请联系开发者！'.format(e))
             input('回车退出程序')
-    else:
-        print('试用到期！！')
-        input('回车退出程序')
+    # else:
+    #     print('试用到期！！')
+    #     input('回车退出程序')
