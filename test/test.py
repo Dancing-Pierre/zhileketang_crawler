@@ -80,13 +80,13 @@ exam_name = str(response['data']['exam_name']).replace('\t', '').replace('\n', '
 data = []
 print(exam_name)
 detail = response['data']['parts']
+number = 1
 # 类型：选择、填空、判断
 for per_part in detail:
     part_title = per_part['title']
     if part_title == '不定项选择题':
         part_title = '多项选择题'
     questions = per_part['questions']
-    number = 1
     # 每个问题
     for question in questions:
         data_dict = {}
@@ -131,6 +131,7 @@ for per_part in detail:
             else:
                 data_dict['solution'] = solution.replace('&nbsp;', ' ')
             data.append(data_dict)
+            number += 1
         elif '计算题' in part_title:
             answers = question['answer']
             # 题干
@@ -161,6 +162,7 @@ for per_part in detail:
                     data_dict['option'] = all_option
                     data_dict['option_num'] = option_num
                     data.append(data_dict)
+                    number += 1
             else:
                 data_dict['题目类型'] = part_title
                 data_dict['题目'] = question_title
@@ -169,6 +171,7 @@ for per_part in detail:
                 data_dict['option'] = ''
                 data_dict['option_num'] = 0
                 data.append(data_dict)
+                number += 1
         elif '不定项选择题' in part_title:
             answers = question['answer']
             # 题干
@@ -198,6 +201,7 @@ for per_part in detail:
                 data_dict['answer'] = answer.replace('&nbsp;', ' ')
                 data_dict['solution'] = solutions[i]
                 data.append(data_dict)
+                number += 1
         elif any(keyword in part_title for keyword in ['综合分析题', '计算分析题', '计算问答题', '问答题']):
             answers = question['answer']
             # 题干
@@ -230,6 +234,7 @@ for per_part in detail:
                     data_dict['option'] = all_option
                     data_dict['option_num'] = option_num
                     data.append(data_dict)
+                    number += 1
                 else:
                     data_dict['题目'] = title
                     data_dict['answer'] = ''
@@ -237,6 +242,7 @@ for per_part in detail:
                     data_dict['option'] = ''
                     data_dict['option_num'] = 0
                     data.append(data_dict)
+                    number += 1
                 print(data_dict)
         else:
             data_dict['题目类型'] = part_title
@@ -254,6 +260,7 @@ for per_part in detail:
             solution = re.sub(clean, '', solution)
             data_dict['solution'] = solution.replace('&nbsp;', ' ')
             data.append(data_dict)
+            number += 1
         print(data_dict)
 df = pd.DataFrame(data)
 df.rename(columns={'solution': '解析', 'answer': '正确答案'}, inplace=True)

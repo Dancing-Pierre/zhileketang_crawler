@@ -28,13 +28,13 @@ def get_exam_detail(exam_list):
                     data = []
                     print(exam_name)
                     detail = response['data']['parts']
+                    number = 1
                     # 类型：选择、填空、判断
                     for per_part in detail:
                         part_title = per_part['title']
                         if part_title == '不定项选择题':
                             part_title = '多项选择题'
                         questions = per_part['questions']
-                        number = 1
                         # 每个问题
                         for question in questions:
                             data_dict = {}
@@ -79,6 +79,7 @@ def get_exam_detail(exam_list):
                                 else:
                                     data_dict['solution'] = solution.replace('&nbsp;', ' ')
                                 data.append(data_dict)
+                                number += 1
                             elif '计算题' in part_title:
                                 answers = question['answer']
                                 # 题干
@@ -109,6 +110,7 @@ def get_exam_detail(exam_list):
                                         data_dict['option'] = all_option
                                         data_dict['option_num'] = option_num
                                         data.append(data_dict)
+                                        number += 1
                                 else:
                                     data_dict['题目类型'] = part_title
                                     data_dict['题目'] = question_title
@@ -117,6 +119,7 @@ def get_exam_detail(exam_list):
                                     data_dict['option'] = ''
                                     data_dict['option_num'] = 0
                                     data.append(data_dict)
+                                    number += 1
                             elif '不定项选择题' in part_title:
                                 answers = question['answer']
                                 # 题干
@@ -146,6 +149,7 @@ def get_exam_detail(exam_list):
                                     data_dict['answer'] = answer.replace('&nbsp;', ' ')
                                     data_dict['solution'] = solutions[i]
                                     data.append(data_dict)
+                                    number += 1
                             elif any(keyword in part_title for keyword in
                                      ['综合分析题', '计算分析题', '计算问答题', '问答题']):
                                 answers = question['answer']
@@ -179,6 +183,7 @@ def get_exam_detail(exam_list):
                                         data_dict['option'] = all_option
                                         data_dict['option_num'] = option_num
                                         data.append(data_dict)
+                                        number += 1
                                     else:
                                         data_dict['题目'] = title
                                         data_dict['answer'] = ''
@@ -186,6 +191,7 @@ def get_exam_detail(exam_list):
                                         data_dict['option'] = ''
                                         data_dict['option_num'] = 0
                                         data.append(data_dict)
+                                        number += 1
                                     print(data_dict)
                             else:
                                 data_dict['题目类型'] = part_title
@@ -203,6 +209,7 @@ def get_exam_detail(exam_list):
                                 solution = re.sub(clean, '', solution)
                                 data_dict['solution'] = solution.replace('&nbsp;', ' ')
                                 data.append(data_dict)
+                                number += 1
                             print(data_dict)
                     df = pd.DataFrame(data)
                     df.rename(columns={'solution': '解析', 'answer': '正确答案'}, inplace=True)
@@ -333,44 +340,44 @@ if __name__ == '__main__':
     # current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     # a = datetime.strptime('20240704', "%Y%m%d").strftime("%Y-%m-%d %H:%M:%S")
     # if current_time <= a:
-        tab_dict = {1: '章节练习', 2: '模拟试卷', 3: '历年真题', 4: 'VIP押题'}
-        print('\033[0;34m======================之了课堂采集程序========================\033[0m')
-        while True:
-            tab_id = int(
-                input('\033[1;36m请输入想采集的板块的ID\n选择列表【1-章节练习|2-模拟试卷|3-历年真题|4-VIP押题】：\033[0m'))
-            if tab_id in [1, 2, 3, 4]:
-                break
-            else:
-                print('\033[31m**输入错误，请从中选择ID【1-章节练习|2-模拟试卷|3-历年真题|4-VIP押题】!!\033[0m')
-        tab_name = tab_dict[tab_id]
-        print(f'\033[31m采集限制- {tab_name} -模块\033[0m')
-        try:
-            subject_id = input('请输入参数subject_id：')
-            t = input('请输入参数t：')
-            cookie = input('请输入cookie：')
-            header = {
-                "Accept": "*/*",
-                "Accept-Encoding": "gzip, deflate, br",
-                "Accept-Language": "zh-CN,zh-TW;q=0.9,zh;q=0.8",
-                "Cookie": cookie,
-                "Referer": 'https://www.zlketang.com/personal/index.html?name=1',
-                "Sec-Ch-Ua": "\"Google Chrome\";v=\"113\", \"Chromium\";v=\"113\", \"Not-A.Brand\";v=\"24\"",
-                "Sec-Ch-Ua-Mobile": "?0",
-                "Sec-Ch-Ua-Platform": "\"Windows\"",
-                "Sec-Fetch-Dest": "empty",
-                "Sec-Fetch-Mode": "cors",
-                "Sec-Fetch-Site": "same-origin",
-                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36",
-                "X-Requested-With": "XMLHttpRequest"
-            }
-            is_get = input('是否需要从中途采集，如需要输入试卷名，不需要就直接回车！！：')
-            exam_list = get_exam_id(subject_id, t, tab_name, is_get)
-            print(f'\033[31m采集列表如下：{exam_list}\033[0m')
-            get_exam_detail(exam_list[tab_name])
-            input('回车退出程序')
-        except Exception as e:
-            print('报错如下：{}，请联系开发者！'.format(e))
-            input('回车退出程序')
+    tab_dict = {1: '章节练习', 2: '模拟试卷', 3: '历年真题', 4: 'VIP押题'}
+    print('\033[0;34m======================之了课堂采集程序========================\033[0m')
+    while True:
+        tab_id = int(
+            input('\033[1;36m请输入想采集的板块的ID\n选择列表【1-章节练习|2-模拟试卷|3-历年真题|4-VIP押题】：\033[0m'))
+        if tab_id in [1, 2, 3, 4]:
+            break
+        else:
+            print('\033[31m**输入错误，请从中选择ID【1-章节练习|2-模拟试卷|3-历年真题|4-VIP押题】!!\033[0m')
+    tab_name = tab_dict[tab_id]
+    print(f'\033[31m采集限制- {tab_name} -模块\033[0m')
+    try:
+        subject_id = input('请输入参数subject_id：')
+        t = input('请输入参数t：')
+        cookie = input('请输入cookie：')
+        header = {
+            "Accept": "*/*",
+            "Accept-Encoding": "gzip, deflate, br",
+            "Accept-Language": "zh-CN,zh-TW;q=0.9,zh;q=0.8",
+            "Cookie": cookie,
+            "Referer": 'https://www.zlketang.com/personal/index.html?name=1',
+            "Sec-Ch-Ua": "\"Google Chrome\";v=\"113\", \"Chromium\";v=\"113\", \"Not-A.Brand\";v=\"24\"",
+            "Sec-Ch-Ua-Mobile": "?0",
+            "Sec-Ch-Ua-Platform": "\"Windows\"",
+            "Sec-Fetch-Dest": "empty",
+            "Sec-Fetch-Mode": "cors",
+            "Sec-Fetch-Site": "same-origin",
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36",
+            "X-Requested-With": "XMLHttpRequest"
+        }
+        is_get = input('是否需要从中途采集，如需要输入试卷名，不需要就直接回车！！：')
+        exam_list = get_exam_id(subject_id, t, tab_name, is_get)
+        print(f'\033[31m采集列表如下：{exam_list}\033[0m')
+        get_exam_detail(exam_list[tab_name])
+        input('回车退出程序')
+    except Exception as e:
+        print('报错如下：{}，请联系开发者！'.format(e))
+        input('回车退出程序')
     # else:
     #     print('试用到期！！')
     #     input('回车退出程序')
