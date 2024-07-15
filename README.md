@@ -1,4 +1,4 @@
-# zhileketang_crawler（采集2023年的中级VIP题库）
+# zhileketang_crawler（采集所有题库）
 之了课堂爬虫，采集题目、答案、解析存word，已打包exe【需自备cookie】
 
 # 1、运行
