@@ -38,7 +38,7 @@ def get_exam_detail(exam_list):
                             data_dict = {}
                             question_title = question['description']
                             # 提取图片
-                            get_img(question_title)
+                            question_title = get_img(question_title)
                             data_dict['题目'] = question_title.replace('&nbsp;', ' ')
                             options = question['options']
                             options = json.loads(options)
@@ -55,7 +55,7 @@ def get_exam_detail(exam_list):
                                     for answer in answers:
                                         all_answers.append(answer.replace('&nbsp;', ' '))
                                 solution = question['solution']
-                                get_img(solution)
+                                solution = get_img(solution)
                                 all_solutions = []
                                 if type(eval(solution)) == list:
                                     solutions = json.loads(solution)
@@ -72,12 +72,11 @@ def get_exam_detail(exam_list):
                                 question_title = question_title.replace('&nbsp;', ' ')
                                 options_num = len(options)
                                 solutions = question['solution']
-                                cleaned_text = solutions
                                 # 提取图片
-                                get_img(solutions)
+                                solutions = get_img(solutions)
                                 if options:
                                     # 输出结果
-                                    solutions = eval(cleaned_text.replace('&nbsp;', ' '))
+                                    solutions = eval(solutions.replace('&nbsp;', ' '))
                                     for i in range(0, options_num):
                                         data_dict = {}
                                         data_dict['题目类型'] = part_title
@@ -97,7 +96,7 @@ def get_exam_detail(exam_list):
                                     data_dict['题目类型'] = part_title
                                     data_dict['题目'] = question_title
                                     data_dict['answer'] = answers
-                                    data_dict['solution'] = cleaned_text.replace('&nbsp;', ' ')
+                                    data_dict['solution'] = solutions.replace('&nbsp;', ' ')
                                     data_dict['option'] = ''
                                     data.append(data_dict)
                             elif '不定项选择题' in part_title:
@@ -106,11 +105,10 @@ def get_exam_detail(exam_list):
                                 question_title = question_title.replace('&nbsp;', ' ')
                                 options_num = len(options)
                                 solutions = question['solution']
-                                cleaned_text = solutions
                                 # 提取图片
-                                get_img(solutions)
+                                solutions = get_img(solutions)
                                 # 输出结果
-                                solutions = eval(cleaned_text.replace('&nbsp;', ' '))
+                                solutions = eval(solutions.replace('&nbsp;', ' '))
                                 for i in range(0, options_num):
                                     data_dict = {}
                                     data_dict['题目类型'] = part_title
@@ -133,13 +131,12 @@ def get_exam_detail(exam_list):
                                 question_title = question_title.replace('&nbsp;', ' ')
                                 options_num = len(options)
                                 solutions = question['solution']
-                                cleaned_text = solutions
                                 # 提取图片
-                                get_img(solutions)
+                                solutions = get_img(solutions)
                                 # 输出结果
-                                cleaned_text = cleaned_text.replace('&nbsp;', ' ')
-                                if '[' in cleaned_text[0] and ']' in cleaned_text[-1]:
-                                    solutions = eval(cleaned_text)
+                                solutions = solutions.replace('&nbsp;', ' ')
+                                if '[' in solutions[0] and ']' in solutions[-1]:
+                                    solutions = eval(solutions)
                                 for i in range(0, options_num):
                                     data_dict = {}
                                     data_dict['题目类型'] = part_title
@@ -173,7 +170,7 @@ def get_exam_detail(exam_list):
                                 answer = question['answer'].replace(',', '')
                                 data_dict['answer'] = answer.replace('&nbsp;', ' ')
                                 solution = question['solution']
-                                get_img(solution)
+                                solution = get_img(solution)
                                 data_dict['solution'] = solution.replace('&nbsp;', ' ')
                                 data.append(data_dict)
                             print(data_dict)
@@ -204,17 +201,12 @@ def get_img(text):
     """
     img_src_list = []
     if text:
-        if text[0] == '[' and text[-1] == ']':
-            html_text = json.loads(text)
-            for text in html_text:
-                img_src_list.extend(re.findall(r'<img\s+src="([^"]+)"', text))
-        else:
-            html_text = text
-            img_src_list.extend(re.findall(r'<img\s+src="([^"]+)"', html_text))
+        img_src_list.extend(re.findall(r'<img\s+src="([^"]+)"', text))
         if img_src_list:
             for i in range(0, len(img_src_list)):
                 url = img_src_list[i]
                 file_name = url.split('/')[-1]
+                new_file_name = '/public/images/' + file_name
                 if 'https://' in url:
                     img_url = url
                 else:
@@ -222,7 +214,9 @@ def get_img(text):
                 r = requests.get(img_url)
                 with open(file_name, "wb") as f:  # wb是写二进制
                     f.write(r.content)
+                text = text.replace(url, new_file_name)
                 time.sleep(1)
+    return text
 
 
 def get_exam_id(subject_id, t, tab_name, is_get):
