@@ -3,7 +3,6 @@ import json
 import random
 import re
 import time
-from datetime import datetime
 
 import pandas as pd
 import requests
@@ -37,14 +36,12 @@ def get_exam_detail(exam_list):
                         # 每个问题
                         for question in questions:
                             data_dict = {}
-                            clean = re.compile(r'<(?!\/?(p|br)\b)[^>]+>')
                             question_title = question['description']
                             # 提取图片
                             get_img(question_title)
-                            question_title = clean.sub('', question_title)
                             data_dict['题目'] = question_title.replace('&nbsp;', ' ')
                             options = question['options']
-                            options = json.loads(re.sub(clean, '', options))
+                            options = json.loads(options)
                             if '综合题' in part_title or '简答题' in part_title or '案例分析' in part_title:
                                 all_options = []
                                 if type(options) == list:
@@ -59,7 +56,6 @@ def get_exam_detail(exam_list):
                                         all_answers.append(answer.replace('&nbsp;', ' '))
                                 solution = question['solution']
                                 get_img(solution)
-                                solution = re.sub(clean, '', solution)
                                 all_solutions = []
                                 if type(eval(solution)) == list:
                                     solutions = json.loads(solution)
@@ -73,7 +69,6 @@ def get_exam_detail(exam_list):
                             elif '计算题' in part_title:
                                 answers = question['answer']
                                 # 题干
-                                question_title = clean.sub('', question_title)
                                 question_title = question_title.replace('&nbsp;', ' ')
                                 options_num = len(options)
                                 solutions = question['solution']
@@ -108,7 +103,6 @@ def get_exam_detail(exam_list):
                             elif '不定项选择题' in part_title:
                                 answers = question['answer']
                                 # 题干
-                                question_title = clean.sub('', question_title)
                                 question_title = question_title.replace('&nbsp;', ' ')
                                 options_num = len(options)
                                 solutions = question['solution']
@@ -136,7 +130,6 @@ def get_exam_detail(exam_list):
                                      ['综合分析题', '计算分析题', '计算问答题', '问答题']):
                                 answers = question['answer']
                                 # 题干
-                                question_title = clean.sub('', question_title)
                                 question_title = question_title.replace('&nbsp;', ' ')
                                 options_num = len(options)
                                 solutions = question['solution']
@@ -181,7 +174,6 @@ def get_exam_detail(exam_list):
                                 data_dict['answer'] = answer.replace('&nbsp;', ' ')
                                 solution = question['solution']
                                 get_img(solution)
-                                solution = re.sub(clean, '', solution)
                                 data_dict['solution'] = solution.replace('&nbsp;', ' ')
                                 data.append(data_dict)
                             print(data_dict)

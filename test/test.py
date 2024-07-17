@@ -59,7 +59,7 @@ def replace_empty_list(option):
         return option
 
 
-with open('2024年注会《经济法》第一次万人模考卷.json', 'r', encoding='utf-8') as file:
+with open('第五节 流动负债管理.json', 'r', encoding='utf-8') as file:
     response = json.load(file)
 exam_name = str(response['data']['exam_name']).replace('\t', '').replace('\n', '').strip()
 
@@ -75,14 +75,12 @@ for per_part in detail:
     # 每个问题
     for question in questions:
         data_dict = {}
-        clean = re.compile(r'<(?!\/?(p|br)\b)[^>]+>')
         question_title = question['description']
         # 提取图片
         get_img(question_title)
-        question_title = clean.sub('', question_title)
         data_dict['题目'] = question_title.replace('&nbsp;', ' ')
         options = question['options']
-        options = json.loads(re.sub(clean, '', options))
+        options = json.loads(options)
         if '综合题' in part_title or '简答题' in part_title or '案例分析' in part_title:
             all_options = []
             if type(options) == list:
@@ -96,7 +94,6 @@ for per_part in detail:
                     all_answers.append(answer.replace('&nbsp;', ' '))
             solution = question['solution']
             get_img(solution)
-            solution = re.sub(clean, '', solution)
             all_solutions = []
             if type(eval(solution)) == list:
                 solutions = json.loads(solution)
@@ -109,7 +106,6 @@ for per_part in detail:
         elif '计算题' in part_title:
             answers = question['answer']
             # 题干
-            question_title = clean.sub('', question_title)
             question_title = question_title.replace('&nbsp;', ' ')
             options_num = len(options)
             solutions = question['solution']
@@ -143,7 +139,6 @@ for per_part in detail:
         elif '不定项选择题' in part_title:
             answers = question['answer']
             # 题干
-            question_title = clean.sub('', question_title)
             question_title = question_title.replace('&nbsp;', ' ')
             options_num = len(options)
             solutions = question['solution']
@@ -169,7 +164,6 @@ for per_part in detail:
         elif any(keyword in part_title for keyword in ['综合分析题', '计算分析题', '计算问答题', '问答题']):
             answers = question['answer']
             # 题干
-            question_title = clean.sub('', question_title)
             question_title = question_title.replace('&nbsp;', ' ')
             options_num = len(options)
             solutions = question['solution']
@@ -214,7 +208,6 @@ for per_part in detail:
             data_dict['answer'] = answer.replace('&nbsp;', ' ')
             solution = question['solution']
             get_img(solution)
-            solution = re.sub(clean, '', solution)
             data_dict['solution'] = solution.replace('&nbsp;', ' ')
             data.append(data_dict)
         print(data_dict)
