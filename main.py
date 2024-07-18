@@ -175,7 +175,8 @@ def get_exam_detail(exam_list):
                             print(data_dict)
                     df = pd.DataFrame(data)
                     df.rename(columns={'solution': '解析', 'answer': '正确答案'}, inplace=True)
-                    df = df[['题目类型', '题目', '解析'] + [col for col in df.columns if '答案' in col]]
+                    df = df[['题目类型', '题目', '解析', '正确答案'] + [col for col in df.columns if
+                                                                        '答案' in col and col != '正确答案']]
                     df['题目类型'] = df['题目类型'].apply(lambda x: ','.join(x.split('、')[1:]) if '、' in x else x)
                     df['正确答案'] = df['正确答案'].apply(replace_empty_list)
                     df.fillna('', inplace=True)
