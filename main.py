@@ -8,6 +8,15 @@ import pandas as pd
 import requests
 
 
+def remove_span_tags(text):
+    """
+    去除span标签
+    :param text:
+    :return:
+    """
+    return re.sub(r'<span[^>]*>(.*?)<\/span>', r'\1', text)
+
+
 def get_exam_detail(exam_list):
     """
     获取试卷详情
@@ -82,22 +91,19 @@ def get_exam_detail(exam_list):
                                         data_dict['题目类型'] = part_title
                                         title = question_title + options[i]['description'].replace('&nbsp;', ' ')
                                         option = options[i]['options']
-                                        all_option = ''
                                         for k, v in option.items():
                                             option = '{}.{}'.format(k, v)
-                                            all_option = all_option + option.replace('&nbsp;', ' ')
+                                            data_dict[f'答案{k}'] = '<p>' + option.replace('&nbsp;', ' ') + '</p>'
                                         data_dict['题目'] = title
                                         answer = json.loads(answers)[i].replace(',', '')
                                         data_dict['answer'] = answer.replace('&nbsp;', ' ')
                                         data_dict['solution'] = solutions[i]
-                                        data_dict['option'] = all_option
                                         data.append(data_dict)
                                 else:
                                     data_dict['题目类型'] = part_title
                                     data_dict['题目'] = question_title
                                     data_dict['answer'] = answers
                                     data_dict['solution'] = solutions.replace('&nbsp;', ' ')
-                                    data_dict['option'] = ''
                                     data.append(data_dict)
                             elif '不定项选择题' in part_title:
                                 answers = question['answer']
@@ -114,12 +120,10 @@ def get_exam_detail(exam_list):
                                     data_dict['题目类型'] = part_title
                                     title = question_title + options[i]['description'].replace('&nbsp;', ' ')
                                     option = options[i]['options']
-                                    all_option = ''
                                     for k, v in option.items():
                                         option = '{}.{}'.format(k, v)
-                                        all_option = all_option + option.replace('&nbsp;', ' ')
+                                        data_dict[f'答案{k}'] = '<p>' + option.replace('&nbsp;', ' ') + '</p>'
                                     data_dict['题目'] = title
-                                    data_dict['option'] = all_option
                                     answer = json.loads(answers)[i].replace(',', '')
                                     data_dict['answer'] = answer.replace('&nbsp;', ' ')
                                     data_dict['solution'] = solutions[i]
@@ -143,30 +147,25 @@ def get_exam_detail(exam_list):
                                     title = question_title + options[i]['description'].replace('&nbsp;', ' ')
                                     if answers.replace('[', '').replace(']', '').replace('"', '').replace(',', ''):
                                         option = options[i]['options']
-                                        all_option = ''
                                         for k, v in option.items():
                                             option = '{}.{}'.format(k, v)
-                                            all_option = all_option + option.replace('&nbsp;', ' ')
+                                            data_dict[f'答案{k}'] = '<p>' + option.replace('&nbsp;', ' ') + '</p>'
                                         data_dict['题目'] = title
                                         answer = json.loads(answers)[i].replace(',', '')
                                         data_dict['answer'] = answer.replace('&nbsp;', ' ')
                                         data_dict['solution'] = solutions[i]
-                                        data_dict['option'] = all_option
                                         data.append(data_dict)
                                     else:
                                         data_dict['题目'] = title
                                         data_dict['answer'] = ''
                                         data_dict['solution'] = solutions[i]
-                                        data_dict['option'] = ''
                                         data.append(data_dict)
                                     print(data_dict)
                             else:
                                 data_dict['题目类型'] = part_title
-                                all_option = ''
                                 for k, v in options.items():
                                     option = '{}.{}'.format(k, v)
-                                    all_option = all_option + option.replace('&nbsp;', ' ')
-                                data_dict['option'] = all_option
+                                    data_dict[f'答案{k}'] = '<p>' + option.replace('&nbsp;', ' ') + '</p>'
                                 answer = question['answer'].replace(',', '')
                                 data_dict['answer'] = answer.replace('&nbsp;', ' ')
                                 solution = question['solution']
@@ -176,14 +175,12 @@ def get_exam_detail(exam_list):
                             print(data_dict)
                     df = pd.DataFrame(data)
                     df.rename(columns={'solution': '解析', 'answer': '正确答案'}, inplace=True)
-                    df = df[['题目类型', '题目', '解析', '正确答案', 'option']]
+                    df = df[['题目类型', '题目', '解析'] + [col for col in df.columns if '答案' in col]]
                     df['题目类型'] = df['题目类型'].apply(lambda x: ','.join(x.split('、')[1:]) if '、' in x else x)
-                    df['option'].fillna('', inplace=True)
-                    options_split = df['option'].apply(split_options)
-                    options_df = pd.DataFrame(options_split.tolist())
-                    result_df = pd.concat([df, options_df], axis=1).drop(columns=['option'])
-                    result_df['正确答案'] = result_df['正确答案'].apply(replace_empty_list)
-                    result_df.to_csv(f"{page}.{exam_id}_{exam_name}.csv", encoding='gbk', errors='ignore', index=False)
+                    df['正确答案'] = df['正确答案'].apply(replace_empty_list)
+                    df.fillna('', inplace=True)
+                    result = df.applymap(remove_span_tags)
+                    result.to_csv(f"{page}.{exam_id}_{exam_name}.csv", encoding='gbk', errors='ignore', index=False)
                     page = page + 1
                     time.sleep(random.randint(2, 4))
                 except Exception as e:
@@ -261,18 +258,12 @@ def get_exam_id(subject_id, t, tab_name, is_get):
     return exam_dict
 
 
-def split_options(option_str):
-    # 使用正则表达式匹配选项
-    pattern = re.compile(r'([A-Z]\.[^A-Z]*)')
-    matches = pattern.findall(option_str)
-    option_dict = {}
-    for match in matches:
-        key = match[0]  # 获取选项的字母
-        option_dict[f'答案{key}'] = '<p>' + match.strip() + '</p>'  # 去掉两端的空格
-    return option_dict
-
-
 def replace_empty_list(option):
+    """
+    空列表
+    :param option:
+    :return:
+    """
     if '[' in option and ']' in option:
         for i in eval(option):
             if not i:
