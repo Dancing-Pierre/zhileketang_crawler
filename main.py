@@ -55,8 +55,8 @@ def get_exam_detail(exam_list):
                                 all_options = []
                                 if type(options) == list:
                                     for per_trouble in options:
-                                        all_options.append(
-                                            data_dict['题目'] + per_trouble['description'].replace('&nbsp;', ' '))
+                                        detail = get_img(per_trouble['description'])
+                                        all_options.append(data_dict['题目'] + detail.replace('&nbsp;', ' '))
                                 answer = question['answer']
                                 all_answers = []
                                 if type(eval(answer)) == list:
@@ -94,6 +94,7 @@ def get_exam_detail(exam_list):
                                         for k, v in option.items():
                                             option = '{}.{}'.format(k, v)
                                             data_dict[f'答案{k}'] = '<p>' + option.replace('&nbsp;', ' ') + '</p>'
+                                        title = get_img(title)
                                         data_dict['题目'] = title
                                         answer = json.loads(answers)[i].replace(',', '')
                                         data_dict['answer'] = answer.replace('&nbsp;', ' ')
@@ -101,6 +102,7 @@ def get_exam_detail(exam_list):
                                         data.append(data_dict)
                                 else:
                                     data_dict['题目类型'] = part_title
+                                    question_title = get_img(question_title)
                                     data_dict['题目'] = question_title
                                     data_dict['answer'] = answers
                                     data_dict['solution'] = solutions.replace('&nbsp;', ' ')
@@ -123,6 +125,7 @@ def get_exam_detail(exam_list):
                                     for k, v in option.items():
                                         option = '{}.{}'.format(k, v)
                                         data_dict[f'答案{k}'] = '<p>' + option.replace('&nbsp;', ' ') + '</p>'
+                                    title = get_img(title)
                                     data_dict['题目'] = title
                                     answer = json.loads(answers)[i].replace(',', '')
                                     data_dict['answer'] = answer.replace('&nbsp;', ' ')
@@ -150,12 +153,14 @@ def get_exam_detail(exam_list):
                                         for k, v in option.items():
                                             option = '{}.{}'.format(k, v)
                                             data_dict[f'答案{k}'] = '<p>' + option.replace('&nbsp;', ' ') + '</p>'
+                                        title = get_img(title)
                                         data_dict['题目'] = title
                                         answer = json.loads(answers)[i].replace(',', '')
                                         data_dict['answer'] = answer.replace('&nbsp;', ' ')
                                         data_dict['solution'] = solutions[i]
                                         data.append(data_dict)
                                     else:
+                                        title = get_img(title)
                                         data_dict['题目'] = title
                                         data_dict['answer'] = ''
                                         data_dict['solution'] = solutions[i]
