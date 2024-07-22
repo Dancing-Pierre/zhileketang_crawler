@@ -214,6 +214,7 @@ def get_img(text):
     :param text:
     :return:
     """
+    global img_list
     img_src_list = []
     if text:
         img_src_list.extend(re.findall(r'<img\s+src="([^"]+)"', text))
@@ -221,16 +222,19 @@ def get_img(text):
             for i in range(0, len(img_src_list)):
                 url = img_src_list[i]
                 file_name = url.split('/')[-1]
-                new_file_name = '/public/images/' + file_name
-                if 'https://' in url:
-                    img_url = url
-                else:
-                    img_url = 'https://image.zlketang.com' + url
-                r = requests.get(img_url)
-                with open(file_name, "wb") as f:  # wb是写二进制
-                    f.write(r.content)
-                text = text.replace(url, new_file_name)
-                time.sleep(1)
+                if file_name not in img_list:
+                    img_list = img_list.append(file_name)
+                    new_file_name = '/public/images/' + file_name
+                    if 'https://' in url:
+                        img_url = url
+                    else:
+                        img_url = 'https://image.zlketang.com' + url
+                    print(f'** 采集图片 {img_url}')
+                    r = requests.get(url=img_url, headers=header)
+                    with open(file_name, "wb") as f:  # wb是写二进制
+                        f.write(r.content)
+                    text = text.replace(url, new_file_name)
+                    time.sleep(random.randint(1, 3))
     return text
 
 
@@ -293,6 +297,7 @@ def replace_empty_list(option):
 
 
 if __name__ == '__main__':
+    img_list = []
     # # 获取当前日期和时间
     # current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     # a = datetime.strptime('20240704', "%Y%m%d").strftime("%Y-%m-%d %H:%M:%S")
