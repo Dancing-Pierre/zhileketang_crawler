@@ -5,6 +5,7 @@ import re
 import time
 
 import pandas as pd
+from fake_useragent import UserAgent
 import requests
 
 
@@ -223,7 +224,7 @@ def get_img(text):
                 url = img_src_list[i]
                 file_name = url.split('/')[-1]
                 if file_name not in img_list:
-                    img_list = img_list.append(file_name)
+                    img_list.append(file_name)
                     new_file_name = '/public/images/' + file_name
                     if 'https://' in url:
                         img_url = url
@@ -329,7 +330,7 @@ if __name__ == '__main__':
             "Sec-Fetch-Dest": "empty",
             "Sec-Fetch-Mode": "cors",
             "Sec-Fetch-Site": "same-origin",
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36",
+            "User-Agent": UserAgent().random,
             "X-Requested-With": "XMLHttpRequest"
         }
         is_get = input('是否需要从中途采集，如需要输入试卷名，不需要就直接回车！！：')
