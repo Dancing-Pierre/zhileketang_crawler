@@ -51,25 +51,30 @@ def get_exam_detail(exam_list):
                             data_dict['题目'] = question_title.replace('&nbsp;', ' ')
                             options = question['options']
                             options = json.loads(options)
-                            if '综合题' in part_title or '简答题' in part_title or '案例分析' in part_title:
+                            if any(keyword in part_title for keyword in ['综合题', '计算分析题', '简答题', '案例分析']):
                                 all_options = []
                                 if type(options) == list:
                                     for per_trouble in options:
-                                        detail = get_img(per_trouble['description'])
-                                        all_options.append(data_dict['题目'] + detail.replace('&nbsp;', ' '))
+                                        tmp_title = data_dict['题目'] + per_trouble['description'].replace('&nbsp;',
+                                                                                                           ' ')
+                                        tmp_title = get_img(tmp_title)
+                                        all_options.append(tmp_title)
                                 answer = question['answer']
                                 all_answers = []
                                 if type(eval(answer)) == list:
                                     answers = json.loads(answer)
                                     for answer in answers:
-                                        all_answers.append(answer.replace('&nbsp;', ' '))
+                                        answer = answer.replace('&nbsp;', ' ')
+                                        answer = get_img(answer)
+                                        all_answers.append(answer)
                                 solution = question['solution']
-                                solution = get_img(solution)
                                 all_solutions = []
                                 if type(eval(solution)) == list:
                                     solutions = json.loads(solution)
                                     for solution in solutions:
-                                        all_solutions.append(solution.replace('&nbsp;', ' '))
+                                        solution = solution.replace('&nbsp;', ' ')
+                                        solution = get_img(solution)
+                                        all_solutions.append(solution)
                                 zipped = zip(all_options, all_answers, all_solutions)
                                 for per_zip in list(zipped):
                                     data_dict = {'题目类型': part_title, '题目': per_zip[0], 'answer': per_zip[1],
@@ -82,7 +87,6 @@ def get_exam_detail(exam_list):
                                 options_num = len(options)
                                 solutions = question['solution']
                                 # 提取图片
-                                solutions = get_img(solutions)
                                 if options:
                                     # 输出结果
                                     solutions = eval(solutions.replace('&nbsp;', ' '))
@@ -96,16 +100,21 @@ def get_exam_detail(exam_list):
                                             data_dict[f'答案{k}'] = '<p>' + option.replace('&nbsp;', ' ') + '</p>'
                                         title = get_img(title)
                                         data_dict['题目'] = title
-                                        answer = json.loads(answers)[i].replace(',', '')
-                                        data_dict['answer'] = answer.replace('&nbsp;', ' ')
-                                        data_dict['solution'] = solutions[i]
+                                        answer = json.loads(answers)[i].replace(',', '').replace('&nbsp;', ' ')
+                                        answer = get_img(answer)
+                                        data_dict['answer'] = answer
+                                        solution = get_img(solutions[i])
+                                        data_dict['solution'] = solution
                                         data.append(data_dict)
                                 else:
                                     data_dict['题目类型'] = part_title
                                     question_title = get_img(question_title)
                                     data_dict['题目'] = question_title
+                                    answers = get_img(answers)
                                     data_dict['answer'] = answers
-                                    data_dict['solution'] = solutions.replace('&nbsp;', ' ')
+                                    solutions = solutions.replace('&nbsp;', ' ')
+                                    solutions = get_img(solutions)
+                                    data_dict['solution'] = solutions
                                     data.append(data_dict)
                             elif '不定项选择题' in part_title:
                                 answers = question['answer']
@@ -113,8 +122,6 @@ def get_exam_detail(exam_list):
                                 question_title = question_title.replace('&nbsp;', ' ')
                                 options_num = len(options)
                                 solutions = question['solution']
-                                # 提取图片
-                                solutions = get_img(solutions)
                                 # 输出结果
                                 solutions = eval(solutions.replace('&nbsp;', ' '))
                                 for i in range(0, options_num):
@@ -127,19 +134,18 @@ def get_exam_detail(exam_list):
                                         data_dict[f'答案{k}'] = '<p>' + option.replace('&nbsp;', ' ') + '</p>'
                                     title = get_img(title)
                                     data_dict['题目'] = title
-                                    answer = json.loads(answers)[i].replace(',', '')
-                                    data_dict['answer'] = answer.replace('&nbsp;', ' ')
-                                    data_dict['solution'] = solutions[i]
+                                    answer = json.loads(answers)[i].replace(',', '').replace('&nbsp;', ' ')
+                                    answer = get_img(answer)
+                                    data_dict['answer'] = answer
+                                    solution = get_img(solutions[i])
+                                    data_dict['solution'] = solution
                                     data.append(data_dict)
-                            elif any(keyword in part_title for keyword in
-                                     ['综合分析题', '计算分析题', '计算问答题', '问答题']):
+                            elif any(keyword in part_title for keyword in ['综合分析题', '计算问答题', '问答题']):
                                 answers = question['answer']
                                 # 题干
                                 question_title = question_title.replace('&nbsp;', ' ')
                                 options_num = len(options)
                                 solutions = question['solution']
-                                # 提取图片
-                                solutions = get_img(solutions)
                                 # 输出结果
                                 solutions = solutions.replace('&nbsp;', ' ')
                                 if '[' in solutions[0] and ']' in solutions[-1]:
@@ -155,15 +161,20 @@ def get_exam_detail(exam_list):
                                             data_dict[f'答案{k}'] = '<p>' + option.replace('&nbsp;', ' ') + '</p>'
                                         title = get_img(title)
                                         data_dict['题目'] = title
-                                        answer = json.loads(answers)[i].replace(',', '')
-                                        data_dict['answer'] = answer.replace('&nbsp;', ' ')
-                                        data_dict['solution'] = solutions[i]
+                                        answer = json.loads(answers)[i].replace(',', '').replace('&nbsp;', ' ')
+                                        answer = get_img(answer)
+                                        data_dict['answer'] = answer
+                                        solution = solutions[i]
+                                        solution = get_img(solution)
+                                        data_dict['solution'] = solution
                                         data.append(data_dict)
                                     else:
                                         title = get_img(title)
                                         data_dict['题目'] = title
                                         data_dict['answer'] = ''
-                                        data_dict['solution'] = solutions[i]
+                                        solution = solutions[i]
+                                        solution = get_img(solution)
+                                        data_dict['solution'] = solution
                                         data.append(data_dict)
                                     print(data_dict)
                             else:
@@ -171,11 +182,12 @@ def get_exam_detail(exam_list):
                                 for k, v in options.items():
                                     option = '{}.{}'.format(k, v)
                                     data_dict[f'答案{k}'] = '<p>' + option.replace('&nbsp;', ' ') + '</p>'
-                                answer = question['answer'].replace(',', '')
-                                data_dict['answer'] = answer.replace('&nbsp;', ' ')
+                                answer = question['answer'].replace(',', '').replace('&nbsp;', ' ')
+                                answer = get_img(answer)
+                                data_dict['answer'] = answer
                                 solution = question['solution']
-                                solution = get_img(solution)
-                                data_dict['solution'] = solution.replace('&nbsp;', ' ')
+                                solution = get_img(solution.replace('&nbsp;', ' '))
+                                data_dict['solution'] = solution
                                 data.append(data_dict)
                             print(data_dict)
                     df = pd.DataFrame(data)
