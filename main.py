@@ -219,7 +219,7 @@ def get_exam_detail(exam_list):
                 result = df.applymap(remove_span_tags)
                 result.to_csv(f"{page}.{exam_id}_{exam_name}.csv", encoding='gbk', errors='ignore', index=False)
                 page = page + 1
-                time.sleep(random.randint(2, 4))
+                time.sleep(random.randint(3, 8))
             except Exception as e:
                 print('报错如下：{}，可以尝试换cookie重启程序，如不行再联系开发者！'.format(e))
                 pass
@@ -253,7 +253,7 @@ def get_img(text):
                     with open(file_name, "wb") as f:  # wb是写二进制
                         f.write(r.content)
                     text = text.replace(url, new_file_name)
-                    time.sleep(random.randint(1, 3))
+                    time.sleep(random.randint(1, 5))
     return text
 
 
