@@ -80,20 +80,26 @@ def get_exam_detail(exam_list):
                                     all_options.append(tmp_title)
                             answer = question['answer']
                             all_answers = []
-                            if type(eval(answer)) == list:
-                                answers = json.loads(answer)
-                                for answer in answers:
-                                    answer = answer.replace('&nbsp;', ' ')
-                                    answer = get_img(answer)
-                                    all_answers.append(answer)
+                            try:
+                                if type(eval(answer)) == list:
+                                    answers = json.loads(answer)
+                                    for answer in answers:
+                                        answer = answer.replace('&nbsp;', ' ')
+                                        answer = get_img(answer)
+                                        all_answers.append(answer)
+                            except:
+                                all_answers = [answer]
                             solution = question['solution']
                             all_solutions = []
-                            if type(eval(solution)) == list:
-                                solutions = json.loads(solution)
-                                for solution in solutions:
-                                    solution = solution.replace('&nbsp;', ' ')
-                                    solution = get_img(solution)
-                                    all_solutions.append(solution)
+                            try:
+                                if type(eval(solution)) == list:
+                                    solutions = json.loads(solution)
+                                    for solution in solutions:
+                                        solution = solution.replace('&nbsp;', ' ')
+                                        solution = get_img(solution)
+                                        all_solutions.append(solution)
+                            except:
+                                all_solutions = [solution]
                             zipped = zip(all_options, all_answers, all_solutions)
                             for per_zip in list(zipped):
                                 data_dict = {'题目类型': part_title, '题目': per_zip[0], 'answer': per_zip[1],
