@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
+import binascii
 import json
 import re
 import time
 
 import pandas as pd
 import requests
+from Crypto.Cipher import AES
+from Crypto.Util.Padding import unpad
 
 
 def remove_span_tags(text):
@@ -48,8 +51,23 @@ def replace_empty_list(option):
         return option
 
 
-with open('第九节 主要合同.json', 'r', encoding='utf-8') as file:
+with open('2024年押题（主观题）（一）.json', 'r', encoding='utf-8') as file:
     response = json.load(file)
+EXAM_AES_KEY = "nm5387945d5d4c91047b3b50234ca7ak"
+# 解析UTF-8格式的AES密钥
+aes_key = EXAM_AES_KEY.encode('utf-8')
+# 将加密的数据从16进制格式解析为字节
+encrypted_bytes = binascii.unhexlify(response['data']['parts'])
+# 创建一个AES密码对象，使用ECB模式和PKCS7填充
+cipher = AES.new(aes_key, AES.MODE_ECB)
+# 解密数据
+decrypted_bytes = cipher.decrypt(encrypted_bytes)
+# 去掉PKCS7填充的内容
+decrypted_data = unpad(decrypted_bytes, AES.block_size)
+# 将解密后的数据转换为UTF-8字符串
+decrypted_string = decrypted_data.decode('utf-8')
+data = json.loads(decrypted_string)
+response['data']['parts'] = data
 exam_name = str(response['data']['exam_name']).replace('\t', '').replace('\n', '').strip()
 
 data = []
@@ -69,7 +87,7 @@ for per_part in detail:
         data_dict['题目'] = question_title.replace('&nbsp;', ' ')
         options = question['options']
         options = json.loads(options)
-        if any(keyword in part_title for keyword in ['综合题', '计算分析题', '简答题', '案例分析']):
+        if any(keyword in part_title for keyword in ['综合题', '计算分析题', '简答题', '案例分析', '主观题']):
             all_options = []
             if type(options) == list:
                 for per_trouble in options:

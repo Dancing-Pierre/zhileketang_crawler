@@ -70,7 +70,8 @@ def get_exam_detail(exam_list):
                         data_dict['题目'] = question_title.replace('&nbsp;', ' ')
                         options = question['options']
                         options = json.loads(options)
-                        if any(keyword in part_title for keyword in ['综合题', '计算分析题', '简答题', '案例分析']):
+                        if any(keyword in part_title for keyword in
+                               ['综合题', '计算分析题', '简答题', '案例分析', '主观题']):
                             all_options = []
                             if type(options) == list:
                                 for per_trouble in options:
@@ -225,7 +226,7 @@ def get_exam_detail(exam_list):
                 result = df.applymap(remove_span_tags)
                 result.to_csv(f"{page}.{exam_id}_{exam_name}.csv", encoding='gbk', errors='ignore', index=False)
                 page = page + 1
-                time.sleep(random.randint(3, 8))
+                time.sleep(random.randint(10, 20))
             except Exception as e:
                 print('报错如下：{}，可以尝试换cookie重启程序，如不行再联系开发者！'.format(e))
                 pass
@@ -259,7 +260,7 @@ def get_img(text):
                     with open(file_name, "wb") as f:  # wb是写二进制
                         f.write(r.content)
                     text = text.replace(url, new_file_name)
-                    time.sleep(random.randint(1, 5))
+                    time.sleep(random.randint(5, 15))
     return text
 
 
