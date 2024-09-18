@@ -22,13 +22,14 @@ def get_img(text):
     """
     img_src_list = []
     if text:
+        text = text.replace('\\', '')
         img_src_list.extend(re.findall(r'<img\s+src="([^"]+)"', text))
         if img_src_list:
             for i in range(0, len(img_src_list)):
                 url = img_src_list[i]
                 file_name = url.split('/')[-1]
                 new_file_name = '/public/images/' + file_name
-                if 'https://' in url:
+                if 'https://' in url or 'http://' in url:
                     img_url = url
                 else:
                     img_url = 'https://image.zlketang.com' + url
@@ -37,6 +38,7 @@ def get_img(text):
                     f.write(r.content)
                 text = text.replace(url, new_file_name)
                 time.sleep(1)
+    text = text.replace('\/', '/')
     return text
 
 
@@ -51,7 +53,7 @@ def replace_empty_list(option):
         return option
 
 
-with open('2024年押题（主观题）（一）.json', 'r', encoding='utf-8') as file:
+with open('社会保险法律制度.json', 'r', encoding='utf-8') as file:
     response = json.load(file)
 EXAM_AES_KEY = "nm5387945d5d4c91047b3b50234ca7ak"
 # 解析UTF-8格式的AES密钥
@@ -76,8 +78,6 @@ detail = response['data']['parts']
 # 类型：选择、填空、判断
 for per_part in detail:
     part_title = per_part['title']
-    if part_title == '不定项选择题':
-        part_title = '多项选择题'
     questions = per_part['questions']
     for question in questions:
         data_dict = {}
@@ -87,7 +87,8 @@ for per_part in detail:
         data_dict['题目'] = question_title.replace('&nbsp;', ' ')
         options = question['options']
         options = json.loads(options)
-        if any(keyword in part_title for keyword in ['综合题', '计算分析题', '简答题', '案例分析', '主观题']):
+        if any(keyword in part_title for keyword in
+               ['综合题', '计算分析题', '简答题', '案例分析', '主观题']):
             all_options = []
             if type(options) == list:
                 for per_trouble in options:
@@ -158,28 +159,43 @@ for per_part in detail:
                 solutions = get_img(solutions)
                 data_dict['solution'] = solutions
                 data.append(data_dict)
-        elif '不定项选择题' in part_title:
+        elif '不定项选择题' in part_title or '多项选择' in part_title:
             answers = question['answer']
             # 题干
             question_title = question_title.replace('&nbsp;', ' ')
             options_num = len(options)
             solutions = question['solution']
             # 输出结果
-            solutions = eval(solutions.replace('&nbsp;', ' '))
-            for i in range(0, options_num):
-                data_dict = {}
+            try:
+                solutions = eval(solutions.replace('&nbsp;', ' '))
+                print('---该多项选择是【综合题】类型---')
+                for i in range(0, options_num):
+                    data_dict = {}
+                    data_dict['题目类型'] = part_title
+                    title = question_title + options[i]['description'].replace('&nbsp;', ' ')
+                    option = options[i]['options']
+                    for k, v in option.items():
+                        option = '{}.{}'.format(k, v)
+                        data_dict[f'答案{k}'] = '<p>' + option.replace('&nbsp;', ' ') + '</p>'
+                    title = get_img(title)
+                    data_dict['题目'] = title
+                    answer = json.loads(answers)[i].replace(',', '').replace('&nbsp;', ' ')
+                    answer = get_img(answer)
+                    data_dict['answer'] = answer
+                    solution = get_img(solutions[i])
+                    data_dict['solution'] = solution
+                    data.append(data_dict)
+            except:
+                print('---该多项选择是【选择题】类型---')
                 data_dict['题目类型'] = part_title
-                title = question_title + options[i]['description'].replace('&nbsp;', ' ')
-                option = options[i]['options']
-                for k, v in option.items():
+                for k, v in options.items():
                     option = '{}.{}'.format(k, v)
                     data_dict[f'答案{k}'] = '<p>' + option.replace('&nbsp;', ' ') + '</p>'
-                title = get_img(title)
-                data_dict['题目'] = title
-                answer = json.loads(answers)[i].replace(',', '').replace('&nbsp;', ' ')
+                answer = question['answer'].replace(',', '').replace('&nbsp;', ' ')
                 answer = get_img(answer)
                 data_dict['answer'] = answer
-                solution = get_img(solutions[i])
+                solution = question['solution']
+                solution = get_img(solution.replace('&nbsp;', ' '))
                 data_dict['solution'] = solution
                 data.append(data_dict)
         elif any(keyword in part_title for keyword in ['综合分析题', '计算问答题', '问答题']):
